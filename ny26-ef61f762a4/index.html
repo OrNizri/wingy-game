@@ -1,0 +1,1195 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ניו יורק עם אמא</title>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#16202E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NY 2026">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Suez+One&family=Assistant:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0} img{max-width:100%} [hidden]{display:none!important}
+</style>
+<style>
+/* Layout: phone-first app. Sticky header + horizontal day strip, content column max 760px, fixed bottom tab bar. Subway-bullet transport chips, taxi-yellow accent. */
+:root{
+  --bg:#EEF1F5; --surface:#FFFFFF; --sunk:#E3E7EE; --ink:#11151C; --muted:#5B6474; --line:#D3D9E2;
+  --taxi:#F6C200; --taxi-ink:#1A1400; --night:#16202E;
+  --ok:#1F8A4C; --ok-bg:#E2F3E9; --warn:#B26A00; --warn-bg:#FFF1D6; --bad:#C2342B; --bad-bg:#FCE6E4; --info:#2557A7; --info-bg:#E3ECFA;
+  --m-walk:#6E7787; --m-subway:#0039A6; --m-uber:#111111; --m-taxi:#F6C200; --m-njt:#7A2E8E; --m-amtrak:#1C5A8A; --m-ferry:#0E8C8C; --m-car:#8A5A2B;
+  --f-display:'Suez One','Assistant',Georgia,serif; --f-body:'Assistant',system-ui,-apple-system,'Segoe UI',Arial,sans-serif; --f-mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1117; --surface:#161C25; --sunk:#1E2631; --ink:#ECEFF4; --muted:#9AA5B5; --line:#2A3441;
+  --taxi:#F6C200; --taxi-ink:#1A1400; --night:#0A0F16;
+  --ok:#5CCB8A; --ok-bg:#15301F; --warn:#F2B44C; --warn-bg:#332611; --bad:#F07A70; --bad-bg:#3A1A18; --info:#86AEF0; --info-bg:#172540;
+  --m-walk:#8892A3; --m-subway:#3D74D9; --m-uber:#F2F2F2; --m-car:#B98250;
+  color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0D1117; --surface:#161C25; --sunk:#1E2631; --ink:#ECEFF4; --muted:#9AA5B5; --line:#2A3441;
+  --taxi:#F6C200; --taxi-ink:#1A1400; --night:#0A0F16;
+  --ok:#5CCB8A; --ok-bg:#15301F; --warn:#F2B44C; --warn-bg:#332611; --bad:#F07A70; --bad-bg:#3A1A18; --info:#86AEF0; --info-bg:#172540;
+  --m-walk:#8892A3; --m-subway:#3D74D9; --m-uber:#F2F2F2; --m-car:#B98250;
+  color-scheme:dark }
+*{box-sizing:border-box}
+html{direction:rtl}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--night)}
+a{color:var(--info)}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;text-wrap:balance;margin:0;line-height:1.2}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--night);color:#F4F6FA}
+header.top .wrap{display:flex;align-items:center;gap:12px;padding-block:10px}
+.logo{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
+.logo .bullet{width:34px;height:34px;border-radius:50%;background:var(--taxi);color:var(--taxi-ink);display:grid;place-items:center;font-family:var(--f-display);font-size:15px;flex:none}
+.logo h1{font-size:20px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.logo small{display:block;font-size:12px;color:#B7C0CE;font-family:var(--f-body)}
+.clock{font-size:12px;color:#B7C0CE;text-align:left;line-height:1.35;flex:none}
+.clock b{color:#fff;font-family:var(--f-mono);font-weight:600}
+
+/* main + tabs */
+main{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+section.view{padding-block:18px 8px;display:grid;gap:18px}
+nav.tabs{position:fixed;inset:auto 0 0 0;z-index:25;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav.tabs .wrap{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;padding-block:6px}
+nav.tabs button{appearance:none;border:0;background:none;color:var(--muted);font:600 11.5px/1.2 var(--f-body);white-space:nowrap;padding:6px 2px;border-radius:10px;display:grid;justify-items:center;gap:3px;cursor:pointer}
+nav.tabs button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav.tabs button[aria-current="page"]{color:var(--ink);background:var(--sunk)}
+nav.tabs button[aria-current="page"] svg{stroke:var(--ink)}
+button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--taxi);outline-offset:2px}
+
+/* generic */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--muted)}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.sec-h h2{font-size:22px}
+.muted{color:var(--muted)}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.p-ok{background:var(--ok-bg);color:var(--ok)} .p-warn{background:var(--warn-bg);color:var(--warn)} .p-bad{background:var(--bad-bg);color:var(--bad)} .p-info{background:var(--info-bg);color:var(--info)} .p-mute{background:var(--sunk);color:var(--muted)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}
+.note{border-inline-start:4px solid var(--taxi);background:var(--sunk);padding:10px 12px;border-radius:8px;font-size:15px}
+.note.bad{border-color:var(--bad);background:var(--bad-bg)}
+.note.ok{border-color:var(--ok);background:var(--ok-bg)}
+
+/* hero (today) */
+.hero{background:var(--night);color:#EEF2F8;border-radius:18px;overflow:hidden;display:grid}
+.hero .ph{aspect-ratio:16/7;max-width:100%;background:#223 center/cover no-repeat;position:relative}
+.hero .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--night),transparent 65%)}
+.hero .in{padding:0 18px 18px;margin-top:-34px;position:relative;z-index:1;display:grid;gap:10px}
+.hero h2{font-size:28px;color:#fff}
+.count{display:flex;gap:8px;flex-wrap:wrap}
+.count div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:6px 12px;text-align:center;min-width:64px}
+.count b{display:block;font-family:var(--f-mono);font-size:24px;color:var(--taxi)}
+.count span{font-size:12px;color:#B7C0CE}
+
+/* flights */
+.flight{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px}
+.flight .end{display:grid;gap:2px}
+.flight .end:last-child{text-align:left}
+.flight .code{font-family:var(--f-mono);font-size:26px;font-weight:600;direction:ltr}
+.flight .t{font-family:var(--f-mono);font-size:15px;direction:ltr}
+.flight .mid{display:grid;justify-items:center;color:var(--muted);font-size:12px}
+.flight .mid svg{width:56px;height:18px}
+.fhead{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+
+/* day strip */
+.strip{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;scroll-snap-type:x proximity;scrollbar-width:thin}
+.strip button{flex:none;scroll-snap-align:start;appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:8px 10px;min-width:62px;display:grid;justify-items:center;gap:1px;cursor:pointer;font-family:var(--f-body)}
+.strip button .dn{font-size:12px;color:var(--muted);font-weight:700}
+.strip button .dd{font-family:var(--f-mono);font-size:18px;font-weight:600}
+.strip button .dt{font-size:11px;color:var(--muted);max-width:76px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.strip button[aria-pressed="true"]{background:var(--taxi);color:var(--taxi-ink);border-color:var(--taxi)}
+.strip button[aria-pressed="true"] .dn,.strip button[aria-pressed="true"] .dt{color:var(--taxi-ink)}
+.strip button.is-today{box-shadow:inset 0 -3px 0 var(--bad)}
+
+/* day header */
+.dayhead{display:grid;gap:10px}
+.dayhead .cover{aspect-ratio:16/8;max-width:100%;border-radius:16px;background:var(--sunk) center/cover no-repeat;position:relative;overflow:hidden}
+.dayhead .cover .cap{position:absolute;inset:auto 0 0 0;padding:28px 14px 12px;background:linear-gradient(to top,rgba(10,14,20,.86),transparent);color:#fff}
+.dayhead .cover .cap h2{font-size:26px;color:#fff}
+.dayhead .cover .cap .eyebrow{color:#E7EBF2}
+.facts{display:flex;flex-wrap:wrap;gap:8px}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px 10px;font-size:14px;display:flex;gap:6px;align-items:center}
+.fact svg{width:16px;height:16px;stroke:var(--muted);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* outfits */
+.outfit{display:grid;gap:6px}
+.outfit .who{display:flex;align-items:center;gap:8px}
+.av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-display);font-size:14px;flex:none}
+.av.l{background:#E9D8F4;color:#5B2C7A} .av.o{background:#D8ECF4;color:#1F5670}
+.outfit ul{margin:0;padding-inline-start:18px}
+.outfit .why{font-size:14px;color:var(--muted)}
+.code-badge{white-space:nowrap;font-size:11px;font-weight:800;letter-spacing:.05em;padding:2px 8px;border-radius:6px;background:var(--night);color:var(--taxi)}
+
+/* timeline */
+.tl{display:grid;gap:12px;position:relative}
+.stop{display:grid;grid-template-columns:96px 1fr;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.stop .img{background:var(--sunk) center/cover no-repeat;min-height:100%;max-width:100%}
+.stop .img.none{display:grid;place-items:center;color:var(--muted)}
+.stop .img.none svg{width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:1.6}
+.stop .body{padding:12px 12px 12px 0;display:grid;gap:6px;min-width:0}
+.stop .row1{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.stop .time{font-family:var(--f-mono);font-weight:600;font-size:14px;direction:ltr;unicode-bidi:isolate;background:var(--sunk);padding:1px 7px;border-radius:6px}
+.stop h3{font-size:18px}
+.stop p{margin:0;font-size:15px}
+.how{display:flex;gap:8px;align-items:flex-start;font-size:14px;background:var(--sunk);border-radius:10px;padding:8px 10px}
+.how .txt{min-width:0}
+.mode{flex:none;display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:12px;white-space:nowrap}
+.mode i{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:800;color:#fff;font-family:var(--f-body)}
+.m-walk i{background:var(--m-walk)} .m-subway i{background:var(--m-subway)} .m-uber i{background:var(--m-uber);color:var(--surface)} .m-taxi i{background:var(--m-taxi);color:var(--taxi-ink)} .m-njt i{background:var(--m-njt)} .m-amtrak i{background:var(--m-amtrak)} .m-ferry i{background:var(--m-ferry)} .m-car i{background:var(--m-car)}
+.stop .links{display:flex;gap:10px;flex-wrap:wrap;font-size:14px}
+.stop.alt{border-style:dashed;opacity:.92}
+.stop.key{border-color:var(--taxi);box-shadow:0 0 0 1px var(--taxi)}
+@media (min-width:600px){.stop{grid-template-columns:150px 1fr}}
+
+/* checklists */
+.chk{display:grid;gap:2px}
+.chk label{display:grid;grid-template-columns:26px 1fr;gap:8px;align-items:start;padding:9px 6px;border-radius:10px;cursor:pointer}
+.chk label:hover{background:var(--sunk)}
+.chk input[type=checkbox]{width:20px;height:20px;margin:2px 0 0;accent-color:var(--ok)}
+.chk .t{font-weight:600}
+.chk .d{font-size:14px;color:var(--muted);display:block}
+.chk label.done .t{text-decoration:line-through;color:var(--muted)}
+.chk .urgent{color:var(--bad);font-weight:800;font-size:12px}
+.progress{height:8px;border-radius:99px;background:var(--sunk);overflow:hidden}
+.progress span{display:block;height:100%;background:var(--ok);border-radius:99px;transition:width .3s}
+details.grp{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:4px 12px}
+details.grp summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;font-family:var(--f-display);font-size:18px}
+details.grp summary::-webkit-details-marker{display:none}
+details.grp summary .cnt{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.inline-input{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px}
+.inline-input input{font:inherit;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);width:120px}
+
+/* tables */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+th,td{padding:9px 10px;text-align:start;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;color:var(--muted);letter-spacing:.04em;background:var(--sunk)}
+tr:last-child td{border-bottom:0}
+
+.ride{display:grid;gap:8px}
+.ride .rr{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.legend{display:flex;flex-wrap:wrap;gap:10px}
+footer{padding-block:24px;font-size:13px;color:var(--muted)}
+.sync{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.sync i{width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}
+.sync.live i{background:var(--ok)} .sync.err i{background:var(--warn)}
+.chk .by{font-size:12px;color:var(--ok);font-weight:700;margin-inline-start:6px}
+/* chat */
+.fab{position:fixed;z-index:26;left:calc(16px + env(safe-area-inset-left,0px));bottom:calc(80px + env(safe-area-inset-bottom,0px));appearance:none;border:0;cursor:pointer;background:var(--taxi);color:var(--taxi-ink);font:800 15px/1 var(--f-body);padding:12px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25);display:flex;gap:8px;align-items:center}
+.fab svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.chat{position:fixed;inset:0;z-index:40;background:var(--bg);display:grid;grid-template-rows:auto 1fr auto;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.chat .bar{background:var(--night);color:#fff}
+.chat .bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-block:12px}
+.chat .bar h2{font-size:20px;color:#fff}
+.chat .bar button{appearance:none;border:1px solid rgba(255,255,255,.3);background:none;color:#fff;font:600 14px var(--f-body);border-radius:999px;padding:6px 12px;cursor:pointer}
+.chat .log{overflow-y:auto}
+.chat .log .wrap{display:grid;gap:10px;padding-block:16px}
+.msg{max-width:88%;padding:10px 13px;border-radius:14px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15.5px}
+.msg.u{justify-self:start;background:var(--taxi);color:var(--taxi-ink);border-end-start-radius:4px}
+.msg.a{justify-self:end;background:var(--surface);border:1px solid var(--line);border-end-end-radius:4px}
+.msg.sys{justify-self:center;background:none;color:var(--muted);font-size:13px;text-align:center}
+.sugg{display:flex;flex-wrap:wrap;gap:8px}
+.sugg button{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 12px;font:600 14px var(--f-body);cursor:pointer;text-align:start}
+.chat form{border-top:1px solid var(--line);background:var(--surface)}
+.chat form .wrap{display:flex;gap:8px;padding-block:10px;align-items:flex-end}
+.chat textarea{flex:1;min-width:0;resize:none;font:inherit;font-size:16px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);max-height:120px}
+.chat form button{appearance:none;border:0;border-radius:12px;padding:11px 16px;font:800 15px var(--f-body);cursor:pointer;background:var(--night);color:#fff}
+.chat form button.stop{background:var(--bad)}
+.acts{display:flex;flex-wrap:wrap;gap:6px}
+.act{display:inline-flex;align-items:center;gap:5px;font:700 13px var(--f-body);text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 11px;cursor:pointer}
+.act:hover{border-color:var(--ink)}
+.act.go{background:var(--night);color:#fff;border-color:var(--night)}
+.msg-acts{justify-self:end;display:flex;gap:6px;flex-wrap:wrap;margin-top:-4px}
+/* money */
+.form{display:grid;gap:10px}
+.form .row{display:flex;gap:8px;flex-wrap:wrap}
+.form input,.form select{font:inherit;font-size:16px;padding:9px 11px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);min-width:0}
+.form input.grow{flex:1 1 180px}
+.form input.num{width:110px;font-family:var(--f-mono)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{appearance:none;border:0;background:var(--bg);color:var(--ink);font:700 14px var(--f-body);padding:9px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--night);color:#fff}
+.btn{appearance:none;border:0;border-radius:10px;padding:10px 16px;font:800 15px var(--f-body);cursor:pointer;background:var(--taxi);color:var(--taxi-ink)}
+.btn.ghost{background:var(--sunk);color:var(--ink)}
+.exp{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
+.exp:last-child{border-bottom:0}
+.exp .amt{font-family:var(--f-mono);font-weight:600;direction:ltr}
+.exp .x{appearance:none;border:0;background:none;color:var(--muted);cursor:pointer;font:700 13px var(--f-body);padding:4px 6px;border-radius:6px}
+.exp .x.sure{background:var(--bad-bg);color:var(--bad)}
+.big{font-family:var(--f-mono);font-size:26px;font-weight:600;direction:ltr;unicode-bidi:isolate}
+.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tips div{background:var(--sunk);border-radius:10px;padding:8px;text-align:center}
+.tips b{display:block;font-family:var(--f-mono);font-size:18px}
+/* show-card overlay */
+.showcard{position:fixed;inset:0;z-index:50;background:#FFFFFF;color:#0B0B0B;display:grid;align-content:center;gap:18px;padding:max(24px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) max(24px,env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));text-align:center;direction:ltr}
+.showcard h2{font-family:var(--f-body);font-weight:800;font-size:clamp(30px,9vw,54px);color:#B3120A;line-height:1.1}
+.showcard p{font-size:clamp(19px,5vw,26px);margin:0;line-height:1.35}
+.showcard .he{direction:rtl;font-size:16px;color:#444}
+.showcard button{justify-self:center;appearance:none;border:2px solid #0B0B0B;background:#fff;color:#0B0B0B;font:800 16px var(--f-body);border-radius:999px;padding:10px 22px;cursor:pointer}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="logo"><div class="bullet">NY</div><div style="min-width:0"><h1>ניו יורק עם אמא</h1><small>אור וליבנת · 8–22 בנובמבר 2026</small></div></div>
+    <div class="clock">ניו יורק <b id="nyClock">--:--</b><br>ישראל <b id="ilClock">--:--</b></div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="card" id="installCard" hidden style="border-color:var(--taxi)">
+  <b>להתקין כאפליקציה בטלפון</b>
+  <p id="installHow" style="margin:6px 0 10px;font-size:15px"></p>
+  <div class="acts"><button class="act go" type="button" id="installBtn" hidden>התקנה</button><button class="act" type="button" id="installHide">לא עכשיו</button></div>
+</div>
+    <section class="view" id="v-today"></section>
+    <section class="view" id="v-days" hidden></section>
+    <section class="view" id="v-before" hidden></section>
+    <section class="view" id="v-pack" hidden></section>
+    <section class="view" id="v-dress" hidden></section>
+    <section class="view" id="v-money" hidden></section>
+    <section class="view" id="v-info" hidden></section>
+  </div>
+  <footer class="wrap"><p style="margin:0 0 8px"><b>צ׳אט, רשימות משותפות עם אמא וכתובת המלון:</b> <a href="https://claude.ai/artifact/MwmhHtfY9PBXiithGDD5aX" target="_blank" rel="noopener">בגרסה ב־Claude ↗</a>. כאן הסימונים נשמרים בטלפון הזה בלבד.</p>מבוסס על USA_Trip_Final.xlsx, תוכנית הלבוש של ליבנת ומדריך ORCA. שעות עם * הן הערכה. מחירי Uber ומונית הם הערכה בלבד ומשתנים לפי שעה ועומס. התמונות מוויקיפדיה.</footer>
+</main>
+
+<button class="fab" id="fab" hidden><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>שאלי על הטיול</button>
+<div class="chat" id="chat" hidden role="dialog" aria-label="צ׳אט הטיול">
+  <div class="bar"><div class="wrap"><h2>שאלי על הטיול</h2><div style="display:flex;gap:8px"><button id="chatClear" type="button">שיחה חדשה</button><button id="chatClose" type="button">סגירה</button></div></div></div>
+  <div class="log" id="chatLog"><div class="wrap" id="chatMsgs"></div></div>
+  <form id="chatForm"><div class="wrap"><textarea id="chatIn" rows="1" placeholder="למשל: מה לובשות מחר? איך מגיעים לסטינג?"></textarea><button id="chatSend" type="submit">שליחה</button></div></form>
+</div>
+
+<div class="showcard" id="showcard" hidden role="dialog" aria-label="כרטיס להצגה"></div>
+
+<nav class="tabs" aria-label="ניווט">
+  <div class="wrap">
+    <button data-tab="today"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>עכשיו</button>
+    <button data-tab="days"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>הימים</button>
+    <button data-tab="before"><svg viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>צ׳קליסט</button>
+    <button data-tab="pack"><svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="13" rx="2"/><path d="M9 7V4h6v3M9 20v1M15 20v1"/></svg>אריזה</button>
+    <button data-tab="dress"><svg viewBox="0 0 24 24"><path d="M8 3l4 3 4-3 4 4-3 3v11H7V10L4 7z"/></svg>לבוש</button>
+    <button data-tab="money"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><circle cx="12" cy="12.5" r="2.5"/><path d="M6 10v5M18 10v5"/></svg>כסף</button>
+    <button data-tab="info"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>מידע</button>
+  </div>
+</nav>
+
+<script>
+const IMG = k => k ? `img/${k}.jpg` : '';
+const MODES = {
+  walk:['ה','הליכה'], subway:['M','סאבוויי'], uber:['U','Uber'], taxi:['T','מונית צהובה'], njt:['NJ','NJ Transit'],
+  amtrak:['A','Amtrak'], ferry:['F','מעבורת'], car:['C','רכב משפחה']
+};
+const TAG = { have:['p-ok','יש כרטיס'], book:['p-bad','להזמין'], free:['p-info','חינם'], opt:['p-mute','חלופה'], tbd:['p-warn','לא סגור'], pay:['p-mute','תשלום במקום'] };
+
+/* ---------------- DAYS ---------------- */
+const DAYS = [
+{ d:8, dow:'א׳', short:'נחיתה', title:'נחיתה ומנוחה בניו ג׳רזי', img:'jfk', w:'15° / 7° מעונן', feel:'בבוקר 3°–5° בחוץ', sleep:'Scotch Plains (משפחה)', sunset:'',
+  alerts:['לוודא שמישהו מהמשפחה אוסף מ־JFK ב־05:30 בערך. אם לא, להזמין Uber מראש (Uber Reserve) עוד מישראל.'],
+  liv:{t:'לוק טיסה', items:['מכנס נוח (טייץ אלגנט או טרנינג מחויט)','חולצה ארוכה + סווטשרט','נעלי ספורט','המעיל החם בהישג יד'], why:'נוחתות ב־5 בבוקר, ותחושה של 3° בחוץ.'},
+  or:{t:'לוק טיסה חם', items:['מכנס נוח עם מותן רכה','חולצה ארוכה + קפוצ׳ון או סוודר','נעלי ספורט','המעיל לובשים, לא אורזים','צעיף דק בתיק היד'], why:'אותו היגיון: שכבות שקל להוריד במטוס, וחם ביציאה מהטרמינל.'},
+  stops:[
+   {t:'04:55', h:'נחיתה ב־JFK, טיסת Arkia IZ991', img:'jfk', p:'ביקורת גבולות, איסוף מזוודות. לשים את ה־eSIM על "פעיל" כבר על המסלול.', m:'walk', how:'עוקבות אחרי השלטים Baggage Claim ואז Ground Transportation.', tag:'have', key:1},
+   {t:'05:45–07:00*', h:'נסיעה ל־Scotch Plains, NJ', img:'scotch', p:'כשעה נסיעה בשעה הזו (בערך 75 ק״מ).', m:'car', how:'עדיף איסוף של המשפחה. אם אין: Uber/Lyft מאזור ה־Rideshare pickup המסומן בטרמינל, Uber XL אם יש הרבה מזוודות. הערכה: $110–160 כולל אגרות, בלי טיפ. מונית צהובה ל־NJ היא לפי מונה + תוספת NJ + אגרות, ולכן Uber יוצא פשוט וצפוי יותר.'},
+   {t:'10:30–15:30', h:'מנוחה, מקלחת, שינה, אוכל ביתי', img:'', p:'לא קובעות שום דבר היום. נלחמות בג׳ט לג: לא לישון יותר מ־2–3 שעות בצהריים.', m:'', how:''},
+   {t:'16:00–18:00', h:'הליכה קלה או ארוחת ערב עם המשפחה', img:'', p:'אם עייפות, נשארות בבית. לישון מוקדם.', m:'car', how:'נסיעה קצרה ברכב המשפחה או הליכה.'}
+  ]},
+{ d:9, dow:'ב׳', short:'Midtown + SUMMIT', title:'Midtown הקלאסית ו־SUMMIT בשקיעה', img:'gct', w:'14° / 10° מעונן', sleep:'Scotch Plains', sunset:'16:43',
+  alerts:['SUMMIT לא הוזמן עדיין: 2 כרטיסים ל־15:15–15:30.','9/11 Museum חינם היום ב־17:30, אבל הכרטיסים נפתחים ב־07:00 שעון NY ומתנגשים עם SUMMIT. לבחור אחד. גיבוי: 16.11.'],
+  liv:{t:'יום הליכה', items:['ג׳ינס או מכנס נוח','חולצה + סוודר דק','המעיל','נעלי ההליכה'], why:'נכנסים ויוצאים ממקומות מחוממים כל היום, אז שכבות.'},
+  or:{t:'יום הליכה + תצפית', items:['ג׳ינס (לא חצאית! הרצפה ב־SUMMIT עשויה מראות)','טישירט + סוודר דק','המעיל','נעלי הליכה','משקפי שמש לחדרי המראות'], why:'ב־SUMMIT יש רצפות ותקרות מראה, ולכן מכנסיים עדיפים.'},
+  stops:[
+   {t:'08:15–10:15*', h:'ארוחת בוקר ונסיעה למנהטן', img:'herald', p:'בודקות בערב שלפני את שעת הרכבת באפליקציה.', m:'njt', how:'מתחנת Fanwood בקו Raritan Valley ל־Newark Penn, ומשם רכבת ל־NY Penn (בערך שעה). קונים כרטיס באפליקציית NJ Transit ומפעילים לפני העלייה. Uber לא משתלם: $80+ ופקקים.'},
+   {t:'10:30–12:15', h:'Grand Central, Chrysler מבחוץ, הספרייה הציבורית', img:'gct', p:'Holiday Fair נפתח היום ב־Vanderbilt Hall. בספרייה: תערוכת Treasures בחינם.', m:'subway', how:'מ־Penn: קו 1/2/3 ל־Times Sq ואז Shuttle ל־Grand Central, או הליכה של 20 דק׳. בין האתרים הולכים ברגל (5–15 דק׳).', tag:'free', link:'https://grandcentralterminal.com/event/2026-holiday-fair/'},
+   {t:'12:15–13:15', h:'Bryant Park, צהריים ושוק החורף', img:'bryant', p:'Winter Village: הכניסה חינם. לשאול על ביצים בכל דוכן.', m:'walk', how:'הליכה של 3 דק׳ מהספרייה.', tag:'free'},
+   {t:'13:15–14:40', h:'Rockefeller Center, St Patrick׳s, חלונות ראווה ב־5th Ave', img:'nbc', p:'העץ עוד בפיגומים, אבל האווירה כבר שם.', m:'walk', how:'הליכה צפונה ב־5th Ave, בערך 10 דק׳.', tag:'free'},
+   {t:'15:15–17:15', h:'SUMMIT One Vanderbilt בשקיעה', img:'summit', p:'שקיעה ב־16:43. רואים את העיר באור יום ובחושך.', m:'walk', how:'15–20 דק׳ הליכה מ־Rockefeller חזרה ל־42nd St.', tag:'book', link:'https://summitov.com/tickets/', key:1},
+   {t:'17:30–19:15', h:'ארוחת ערב / The Campbell', img:'gct', p:'בר היסטורי בתוך Grand Central. להודיע מראש על האלרגיה לביצים.', m:'walk', how:'צמוד ל־SUMMIT.', tag:'pay', link:'https://www.thecampbellnyc.com/'},
+   {t:'19:15–21:00*', h:'חזרה ל־Scotch Plains', img:'', p:'', m:'njt', how:'Subway ל־Penn ואז NJ Transit ל־Fanwood. לבדוק את הרכבת האחרונה מראש.'}
+  ]},
+{ d:10, dow:'ג׳', short:'Kelly & Mark', title:'LIVE with Kelly & Mark ושכונות ציוריות', img:'kelly', w:'17° / 9° נעים', sleep:'Scotch Plains', sunset:'',
+  alerts:['השכמה מוקדמת מאוד. להגיע לצ׳ק־אין לפי הכרטיס (281 Spring St).','אמא מלמדת בזום 11:15–12:45 (18:15–19:45 בישראל). צריך לה מקום שקט עם אינטרנט.','ביקור BNI של אמא: שעה ומקום עוד לא ידועים.'],
+  liv:{t:'לוק אחד לכל היום הכי עמוס', items:['טופ בצבע אחיד בוהק (ירוק בקבוק, טורקיז או אדום)','מכנס אלגנט','הבלייזר','נעל אלגנטית נוחה'], why:'מתאים לקהל בטלוויזיה, נראה טוב בזום ומכובד ל־BNI. להימנע מלבן, משחור מלא ומפסים עדינים.'},
+  or:{t:'קהל בטלוויזיה', items:['טופ בצבע אחיד וחזק (כחול רויאל, אמרלד או פוקסיה)','מכנס כהה מחויט או ג׳ינס כהה','בלייזר או קרדיגן מובנה','נעליים נוחות שנראות טוב, יש עמידה בתור','בלי לוגו גדול, בלי לבן ובלי פסים צפופים'], why:'המצלמה אוהבת צבע אחיד. פסים דקים "מרצדים" על המסך.'},
+  stops:[
+   {t:'05:00–07:15*', h:'יציאה מוקדמת מאוד ל־Hudson Square', img:'kelly', p:'זמן היציאה תלוי בכתובת המשפחה.', m:'uber', how:'בשעה הזו עדיף Uber (להזמין Uber Reserve בערב הקודם): כ־45–60 דק׳, הערכה $80–120. אם יש רכבת NJ Transit מתאימה לפני 06:00, היא זולה בהרבה, ומ־Penn לוקחים מונית צהובה ל־Spring St.'},
+   {t:'07:45–10:00*', h:'LIVE with Kelly & Mark', img:'kelly', p:'קהל באולפן. להביא כרטיס + תעודה. שעת הסיום לא מאומתת.', m:'walk', how:'281 Spring St. לוודא מול הכרטיס.', tag:'have', link:'https://livewithkellyandmark.com/show-info/', key:1},
+   {t:'10:15–11:15', h:'בראנץ׳ רגוע ב־SoHo', img:'soho', p:'Balthazar אייקוני. מאפים ורטבים עשויים להכיל ביצים, לשאול.', m:'walk', how:'הליכה של 10 דק׳.', tag:'pay', link:'https://balthazarny.com/'},
+   {t:'11:15–12:45', h:'אמא בזום · אור בגלריות SoHo/Nolita', img:'soho', p:'אמא צריכה פינה שקטה (בית קפה שקט או לובי מלון). אור ממשיכה לבד או מחכה ל־12:45.', m:'walk', how:'הכל ברגל.'},
+   {t:'13:45–16:15', h:'West Village ו־Washington Square Park', img:'wsp', p:'רחובות הכפר, הפסקת קפה.', m:'walk', how:'הליכה של 15 דק׳, או מונית צהובה קצרה אם עייפות ($12–18).'},
+   {t:'16:15–18:15', h:'ארוחת ערב מוקדמת וחזרה', img:'', p:'אחרי השכמה של 5 בבוקר, לא מאריכות.', m:'njt', how:'Subway ל־Penn ואז NJ Transit.'}
+  ]},
+{ d:11, dow:'ד׳', short:'פסל החירות', title:'פסל החירות ודאונטאון', img:'liberty', w:'14° / 9° אפשר טפטוף', sleep:'Scotch Plains', sunset:'',
+  alerts:['כרטיסי מעבורת לא הוזמנו. רק באתר הרשמי Statue City Cruises, יציאה מ־Battery Park. גיבוי חינם: Staten Island Ferry.','Veterans Day: מצעד במידטאון וייתכנו שינויים בתחבורה.','ORCA Connections: להשלים פרופיל עד היום.'],
+  liv:{t:'יום הליכה', items:['כמו 9.11: שכבות ונעלי הליכה','המטרייה הקטנה בתיק'], why:'למקרה של טפטוף.'},
+  or:{t:'יום מים ורוח', items:['ג׳ינס + טישירט ארוך + סוודר','מעיל עם ברדס','נעליים עמידות למים','תיק קטן: יש בידוק כמו בשדה תעופה לפני המעבורת'], why:'על המעבורת קר ורטוב יותר מאשר ברחוב.'},
+  stops:[
+   {t:'07:30–09:15*', h:'נסיעה ל־Battery Park', img:'skyline', p:'', m:'njt', how:'NJ Transit ל־NY Penn, ומשם קו 1 עד South Ferry (25 דק׳). מונית מ־Penn: כ־$30–40 ופקקים.'},
+   {t:'09:15–13:00*', h:'מעבורת לפסל החירות ו־Ellis Island', img:'liberty', p:'בידוק ביטחוני לפני העלייה. אפשר להסתפק בהפלגה.', m:'ferry', how:'Statue City Cruises מ־Battery Park. רק אתר רשמי!', tag:'book', link:'https://www.cityexperiences.com/new-york/city-cruises/statue/', key:1},
+   {t:'אם יש זמן', h:'Ellis Island', img:'ellis', p:'מוזיאון ההגירה. כלול באותו כרטיס.', m:'ferry', how:'אותה מעבורת ממשיכה לשם.'},
+   {t:'13:15–14:15', h:'צהריים ו־Wall Street', img:'wall', p:'אפשר גם המוזיאון האינדיאני בחינם (1 Bowling Green).', m:'walk', how:'הליכה של 10 דק׳ מהרציף.', tag:'free'},
+   {t:'14:30–16:15', h:'אנדרטת 9/11 וה־Oculus', img:'memorial', p:'היום רק האנדרטה (חינם), לא המוזיאון המלא.', m:'walk', how:'10–20 דק׳ הליכה.', tag:'free'},
+   {t:'', h:'ה־Oculus', img:'oculus', p:'תחנת הרכבת הלבנה של קלטרווה. שווה להיכנס.', m:'walk', how:'צמוד לאנדרטה.', tag:'free'},
+   {t:'16:30–18:00', h:'Seaport ו־Pier 17', img:'seaport', p:'ארוחת ערב מוקדמת מול הנהר.', m:'walk', how:'15 דק׳ הליכה, או מונית קצרה.'},
+   {t:'18:00–20:00*', h:'חזרה לניו ג׳רזי', img:'', p:'חלופה: DOC NYC פרמיירה 18:45, רק אם היום נגמר בזמן.', m:'njt', how:'קו 2/3 מ־Fulton St ל־Penn ואז NJ Transit.'}
+  ]},
+{ d:12, dow:'ה׳', short:'וושינגטון DC', title:'יום טיול לוושינגטון', img:'capitol', w:'10° / 6° קר ויבש', sleep:'Scotch Plains', sunset:'16:56 (DC)',
+  alerts:['רכבות Amtrak וכרטיס Library of Congress לא הוזמנו (נדחה לבקשתך). Metropark (MET) → Washington Union (WAS), 2 מבוגרות, הלוך וחזור.','חלופה: פילדלפיה (50 דק׳ ברכבת בלבד).'],
+  liv:{t:'מתחילים להתחמם', items:['שכבה תרמית או חולצה ארוכה מתחת לסוודר','המעיל החם','צעיף (על המול חשופים לרוח)','נעלי ההליכה'], why:'הליכה ארוכה בחוץ.'},
+  or:{t:'יום הליכה ארוך בקור', items:['חולצה תרמית + סוודר','ג׳ינס או מכנס חם','המעיל החם + צעיף','נעלי הליכה שכבר "נעלת" (לא חדשות)','תיק קטן: בידוק בקפיטול ובספרייה'], why:'10° עם רוח פתוחה על ה־National Mall.'},
+  stops:[
+   {t:'05:30–06:45*', h:'יציאה לתחנת Metropark', img:'metropark', p:'', m:'car', how:'רכב משפחה, או Uber (להזמין Reserve בערב הקודם): 15–20 דק׳, הערכה $25–40.'},
+   {t:'רכבת בוקר', h:'Amtrak ל־Washington Union Station', img:'union', p:'יעד הגעה: 09:30–10:00. שעת נחיתה בוושינגטון לפי הרכבת שתיבחר.', m:'amtrak', how:'כ־2.5–3 שעות. eTicket באפליקציית Amtrak.', tag:'book', link:'https://www.amtrak.com/', key:1},
+   {t:'09:45–10:30', h:'הקפיטול מבחוץ', img:'capitol', p:'צילומים בחזית.', m:'walk', how:'15–20 דק׳ הליכה מ־Union Station.', tag:'free'},
+   {t:'10:30–11:30', h:'Library of Congress, בניין Jefferson', img:'loc', p:'אולם הקריאה המרהיב. כרטיס timed-entry חינם (נפתח גם ביום עצמו ב־09:00).', m:'walk', how:'מנהרה/הליכה קצרה מהקפיטול.', tag:'book', link:'https://www.loc.gov/visit/'},
+   {t:'11:30–13:45', h:'צהריים ומוזיאון אחד ב־Mall', img:'amhist', p:'American History או National Gallery. לא שניהם. כניסה חינם.', m:'walk', how:'הליכה, או Uber קצר ($8–12, ב־DC Uber זול).', tag:'free'},
+   {t:'14:00–15:15', h:'Washington Monument והבית הלבן מבחוץ', img:'wmon', p:'', m:'uber', how:'המרחקים גדולים מכפי שנראה במפה. חלק ברגל, חלק Uber.', tag:'free'},
+   {t:'15:30–16:45', h:'Lincoln Memorial ו־Reflecting Pool', img:'lincoln', p:'סיום מרשים לקראת שקיעה ב־16:56.', m:'walk', how:'הליכה לאורך ה־Reflecting Pool.', tag:'free'},
+   {t:'17:00–19:00*', h:'חזרה ל־Union Station ורכבת חזור', img:'union', p:'ארוחה קלה בתחנה.', m:'uber', how:'Uber מה־Lincoln Memorial ל־Union Station: 10–15 דק׳, הערכה $12–20.'},
+   {t:'ערב מאוחר*', h:'Metropark → בית', img:'', p:'יום ארוך. לא מתכננות ערב.', m:'car', how:'איסוף משפחה או Uber מהתחנה.'}
+  ]},
+{ d:13, dow:'ו׳', short:'High Line + Whitney', title:'High Line, Chelsea ו־Whitney בערב', img:'highline', w:'7° / 5° טפטוף', sleep:'Scotch Plains', sunset:'16:39',
+  alerts:['Whitney: 2 כרטיסים מאושרים ל־17:30 (PDF בדרייב). לא לקנות שוב!','Morgan Library: יש קישור בדרייב, שעה לא אומתה. מתנגש עם Whitney.'],
+  liv:{t:'קר ורטוב', items:['שכבה תרמית + סוודר','המעיל','נעליים עמידות למים','לערב ב־Whitney מחליפים רק את הטופ למשהו יפה; המעיל נשאר במלתחה'], why:'אותו לוק כל היום, עם שדרוג קטן לערב.'},
+  or:{t:'קר ורטוב + ערב מוזיאון', items:['חולצה תרמית + סוודר','ג׳ינס כהה','מעיל עמיד למים','נעליים עמידות למים','בתיק: טופ יפה או עגילים לערב'], why:'High Line פתוח לגמרי לרוח.'},
+  stops:[
+   {t:'09:00–10:30*', h:'נסיעה ל־Hudson Yards', img:'', p:'', m:'njt', how:'NJ Transit ל־Penn ואז 10 דק׳ הליכה מערבה (או קו 7 ל־34 St–Hudson Yards).'},
+   {t:'10:30–11:30', h:'Vessel ו־Hudson Yards', img:'vessel', p:'Edge לא נבחר, SUMMIT מספיק.', m:'walk', how:'', tag:'free'},
+   {t:'11:30–13:00', h:'הליכה דרומה ב־High Line', img:'highline', p:'ללבוש חם.', m:'walk', how:'נכנסים ב־34th St והולכים דרומה.', tag:'free'},
+   {t:'13:00–14:15', h:'Chelsea Market', img:'chelsea', p:'להודיע על אלרגיה בכל דוכן.', m:'walk', how:'יורדות מה־High Line ב־16th St.', tag:'pay'},
+   {t:'14:30–16:40', h:'Little Island ו־Pier 57 Rooftop לשקיעה', img:'little', p:'שקיעה 16:39. הגג ב־Pier 57 חינם, לא צריך הזמנה.', m:'walk', how:'5–10 דק׳ הליכה.', tag:'free'},
+   {t:'17:30–19:00', h:'Whitney Free Friday Night', img:'whitney', p:'תערוכת Roy Lichtenstein. להביא את ה־PDF עם 2 הברקודים.', m:'walk', how:'בקצה הדרומי של ה־High Line, Gansevoort St.', tag:'have', link:'https://drive.google.com/file/d/1qmqsBdEM2aSxnvXJb0IT549kvI936e8N/view', key:1},
+   {t:'19:00–20:30', h:'ארוחת ערב ב־West Village וחזרה', img:'wsp', p:'', m:'subway', how:'קו A/C/E מ־14 St ל־Penn ואז NJ Transit.'}
+  ]},
+{ d:14, dow:'ש׳', short:'ברוקלין', title:'גשר ברוקלין, DUMBO ו־Williamsburg', img:'bbridge', w:'8° / 3° היום הכי קר', feel:'תחושה של 3° בבוקר', sleep:'Scotch Plains', sunset:'16:38',
+  alerts:['שבת: לבדוק בערב הקודם את לוח NJ Transit לסופ״ש, הלוך וחזור.','על הגשר יש רוח חזקה. כפפות, כובע, צעיף.'],
+  liv:{t:'הקפיצה המלאה', items:['שכבה תרמית + סוודר עבה','המעיל החם','צעיף + כובע + כפפות','נעלי הליכה עמידות'], why:'על הגשר יש רוח. זה היום שבו מודים לעצמך על הכפפות.'},
+  or:{t:'הכי חם שיש', items:['חולצה תרמית + סוודר עבה','ג׳ינס (אפשר גרביון תרמי מתחת)','המעיל החם','כובע, צעיף, כפפות שעובדות עם מסך מגע','נעלי הליכה עמידות'], why:'3° בבוקר ורוח מהנהר.'},
+  stops:[
+   {t:'07:30–09:10*', h:'נסיעה ל־City Hall במנהטן', img:'', p:'', m:'njt', how:'NJ Transit ל־Penn, ואז קו 4/5/6 או 2/3 ל־City Hall / Brooklyn Bridge.'},
+   {t:'09:15–10:15', h:'חציית גשר ברוקלין ברגל', img:'bbridge', p:'מתחילים ב־Centre St ליד City Hall. בבוקר פחות עומס.', m:'walk', how:'כ־40 דק׳ הליכה עם עצירות צילום.', tag:'free', key:1},
+   {t:'10:20–11:45', h:'DUMBO: Washington St ו־Pebble Beach', img:'dumbo', p:'הצילום הקלאסי של גשר מנהטן בין הבניינים.', m:'walk', how:'יורדות מהגשר ישר ל־DUMBO.', tag:'free'},
+   {t:'', h:'Jane׳s Carousel', img:'carousel', p:'$4 למי שרוצה לרכוב.', m:'walk', how:'על המים, צמוד.', tag:'pay'},
+   {t:'11:45–13:20', h:'Time Out Market וטיילת Brooklyn Heights', img:'promenade', p:'Time Out Market ב־55 Water St. לבדוק ביצים וזיהום צולב לפני קנייה.', m:'walk', how:'15 דק׳ הליכה לטיילת.', tag:'free'},
+   {t:'13:30–14:00', h:'NYC Ferry ל־Williamsburg', img:'ferry', p:'$5 לאדם לכיוון.', m:'ferry', how:'מרציף DUMBO/Fulton Ferry לכיוון North Williamsburg. קונים באפליקציית NYC Ferry.', tag:'pay', link:'https://www.ferry.nyc/'},
+   {t:'14:00–15:50', h:'Bedford Ave, חנויות ועיצוב', img:'wburg', p:'', m:'walk', how:''},
+   {t:'עד 16:00', h:'Domino Park לשקיעה', img:'domino', p:'שקיעה 16:38 מול קו הרקיע של מנהטן.', m:'walk', how:'', tag:'free', key:1},
+   {t:'17:00–18:30', h:'ארוחת ערב מוקדמת וחזרה ל־NJ', img:'', p:'לא נשארות מאוחר בלי לבדוק את NJ Transit של שבת.', m:'subway', how:'קו L ל־14 St, ואז PATH או קו 1/2/3 ל־Penn. אם עייפות: Uber ישר ל־Scotch Plains, הערכה $90–130.'}
+  ]},
+{ d:15, dow:'א׳', short:'מלון + Rockettes', title:'מעבר למלון ו־Rockettes ברדיו סיטי', img:'radio', w:'7° / 1° בוקר קפוא', sleep:'המלון במידטאון', sunset:'',
+  alerts:['Rockettes ב־17:00 לא נרכש עדיין. 2 מושבים צמודים, לבדוק מחיר כולל עמלות.','לשאול את המלון אם אפשר להפקיד מזוודות לפני הצ׳ק־אין.'],
+  liv:{t:'חגיגי־נוח', items:['ביום: נוח למעבר והליכה, עם שכבות חמות','לערב: מכנס אלגנט או שמלה עם גרביון','המגפון האלגנט','טופ יפה + המעיל החם מעל'], why:'בחוץ 2°, באולם חם.'},
+  or:{t:'מעבר + ערב מופע', items:['בבוקר: ג׳ינס, סוודר, מעיל (סוחבות מזוודות)','לערב: שמלת סריג או מכנס אלגנט + טופ נוצץ עדין','מגפונים בעקב נמוך','גרביון חם'], why:'Radio City בעונת חגים: אנשים מתלבשים קצת חגיגי.'},
+  stops:[
+   {t:'09:30–11:30*', h:'מעבר מ־Scotch Plains למלון במידטאון', img:'herald', p:'המלון ליד Herald Square. להפקיד מזוודות אם אפשר.', m:'uber', how:'עם מזוודות: רכב משפחה או Uber XL ישר למלון (שעה עד שעה וחצי, הערכה $100–140 + אגרת מנהרה). ברכבת עם מזוודות זה קשה.', key:1},
+   {t:'11:15–12:00', h:'Poster House (חינם היום)', img:'poster', p:'ראשון שלישי בחודש: כניסה חינם. רק אם המזוודות כבר במלון.', m:'walk', how:'119 W 23rd St. קו F/M מ־34 St–Herald Sq עד 23 St, או 15 דק׳ הליכה.', tag:'free'},
+   {t:'12:15–14:15', h:'St Patrick׳s, חנויות דגל וצהריים', img:'stpat', p:'', m:'subway', how:'קו B/D/F/M מ־Herald Sq ל־47–50 Sts–Rockefeller Ctr.'},
+   {t:'14:15–16:20', h:'זמן חופשי, קפה, שופינג', img:'fifth', p:'להגיע ל־Radio City בנחת.', m:'walk', how:''},
+   {t:'17:00–18:30', h:'Rockettes Christmas Spectacular', img:'radio', p:'להגיע 30 דק׳ לפני.', m:'walk', how:'1260 6th Ave.', tag:'book', link:'https://www.rockettes.com/christmas/calendar/', key:1},
+   {t:'18:45–20:00', h:'Bryant Park Winter Village מואר', img:'bryant', p:'החלקה רק אם רוצות (השכרה $19–65 לפני מס).', m:'walk', how:'10 דק׳ הליכה דרומה.', tag:'free'},
+   {t:'20:00–20:30', h:'חזרה למלון', img:'herald', p:'', m:'walk', how:'5 דק׳ הליכה. סוף־סוף לא צריך רכבת ל־NJ.'}
+  ]},
+{ d:16, dow:'ב׳', short:'פיילוט', title:'פיילוט עם שלי והצוות', img:'murray', w:'12° / 5° מעונן', sleep:'המלון במידטאון', sunset:'',
+  alerts:['כתובת הפיילוט לא נמסרה. ההזמנה ממוענת לליבנת: לוודא שגם אור מוזמנת.','Seth Meyers: רשימת המתנה בלבד. בלי אישור, MoMA.','9/11 Museum חינם היום ב־17:30 (כרטיסים נפתחים ב־07:00 NY).'],
+  liv:{t:'לוק עסקי מלא', items:['הבלייזר','מכנס אלגנט או חצאית','טופ מחויט','נעל אלגנטית נוחה'], why:'זה הבוקר שבו את עובדת. להיראות בדיוק כפי שאת רוצה להיזכר.'},
+  or:{t:'Business Casual', items:['אם מצטרפת לפיילוט: מכנס מחויט + סריג דק + בלייזר','אם לא: ג׳ינס כהה + סוודר, יום חופשי','מגפונים נוחים'], why:'אחה״צ חופשי, אז לבחור משהו שעובד גם בהליכה.'},
+  stops:[
+   {t:'09:15–09:45*', h:'יציאה לפיילוט', img:'', p:'תלוי בכתובת.', m:'subway', how:'מ־Herald Sq. אם קרוב: הליכה. מונית צהובה במידטאון: $12–25.'},
+   {t:'10:00–12:00', h:'פיילוט מוצר עם שלי והצוות', img:'murray', p:'קבוצה מצומצמת. מיקום TBD.', m:'', how:'', tag:'tbd', link:'https://chat.whatsapp.com/BQpDAi35cTc5MQgc04ofgR', key:1},
+   {t:'12:00–14:00', h:'צהריים · רכבל Roosevelt Island (חלופה)', img:'tram', p:'רק אם הזמן מאפשר.', m:'subway', how:'הרכבל יוצא מ־59th St & 2nd Ave, עובד עם OMNY ($3).', tag:'opt'},
+   {t:'16:30', h:'Late Night with Seth Meyers', img:'nbc', p:'רק עם אישור רשמי מ־1iota.', m:'walk', how:'30 Rockefeller Plaza.', tag:'tbd'},
+   {t:'15:30–17:30', h:'או: MoMA', img:'moma', p:'$30 לאדם. חלופה ל־Seth.', m:'subway', how:'קו E/M ל־5 Av/53 St.', tag:'opt', alt:1},
+   {t:'18:00–19:30', h:'ארוחת ערב וחזרה למלון', img:'', p:'מנוחה לפני שבוע הכנס.', m:'walk', how:''}
+  ]},
+{ d:17, dow:'ג׳', short:'ORCA קוקטייל', title:'ORCA: קוקטייל פתיחה ב־7 WTC', img:'wtc7', w:'14° / 6° בעיקר בהיר', sleep:'המלון במידטאון', sunset:'', orca:1,
+  alerts:['חובה תעודה מזהה (דרכון) לכניסה לבניין.','אמא מלמדת בזום 11:15–12:45 מהמלון.','לא לקנות ברודווי ל־19:00 היום. מתנגש.'],
+  liv:{t:'Business Casual · ערכה 1', items:['הבלייזר','מכנס אלגנט או שמלת ג׳רסי','מגפון אלגנט','תכשיט אחד בולט'], why:'מהזום ישר לקוקטייל. תכשיט אחד בולט מחליף הכל.'},
+  or:{t:'Business Casual · קוקטייל פתיחה', items:['מכנס מחויט + חולצה יפה (סאטן או משי)','או שמלה / חצאית מידי + בלייזר','מגפונים בעקב נמוך (עומדות 4 שעות)','תכשיט אחד בולט','כרטיסי ביקור או QR של לינקדאין'], why:'קוד הלבוש של אורלי: עסקי אלגנטי ונוח, מקצועי ומוקפד. לא נדרש לבוש ערב רשמי.'},
+  stops:[
+   {t:'11:15–12:45', h:'אמא מלמדת בזום מהמלון', img:'herald', p:'18:15–19:45 בישראל.', m:'', how:''},
+   {t:'15:00–15:40*', h:'יציאה ל־7 World Trade Center', img:'', p:'', m:'subway', how:'קו R/W מ־34 St–Herald Sq עד Cortlandt St (20 דק׳). בעקבים או בגשם: מונית צהובה/Uber, 25–35 דק׳, הערכה $25–40.'},
+   {t:'16:00–20:00', h:'ORCA Welcome Cocktail Reception', img:'wtc7', p:'7 World Trade Center, קומה 10, 250 Greenwich St. כולל אוכל.', m:'walk', how:'', tag:'have', key:1},
+   {t:'20:00–21:00', h:'ארוחה קלה או ישר למלון', img:'oculus', p:'', m:'taxi', how:'בערב עדיף מונית צהובה מ־Greenwich St או Uber חזרה למלון (הערכה $25–35).'}
+  ]},
+{ d:18, dow:'ד׳', short:'ORCA יום 1 + דיסקו', title:'ORCA יום תוכן 1 ומסיבת דיסקו', img:'murray', w:'16° / 10° מעונן', sleep:'המלון במידטאון', sunset:'', orca:1,
+  alerts:['Drew Barrymore 11:00 מתנגש עם הכנס. להחליט, ולעשות Confirm רק אם בוחרות Drew.','כתובת מסיבת הדיסקו לא פורסמה. לבקש מצוות ORCA.','רוזיטה (תוכנית של אמא) בערב: שעה ומקום לא ידועים.'],
+  liv:{t:'Business Casual · ערכה 2', items:['ביום: סריג דק אלגנט או טריקו + מכנס או חצאית + בלייזר','לערב: אותה תחתית, מחליפים את הטופ לנוצץ או סאטן','עגילים'], why:'מוכנה לדיסקו בלי לחזור למלון.'},
+  or:{t:'Business Casual ← דיסקו שנות ה־80', items:['ביום: מכנס מחויט + סריג דק + בלייזר','לערב לפי אורלי: ג׳ינס, נעלי ספורט, ז׳קט פאייטים מנצנץ','אביזרים נוצצים וקצת גלאם (עגילים גדולים, איפור מנצנץ)','נעלי הספורט והז׳קט בתיק, או קפיצה של 5 דק׳ למלון'], why:'קוד הלבוש של אורלי: "ג׳ינס, נעלי ספורט והרבה מצב רוח טוב"; אם מסתתר בארון ז׳קט פאייטים משנות ה־80, זה הזמן.'},
+  stops:[
+   {t:'08:00–08:20', h:'הליכה לכנס', img:'murray', p:'מהמלון מזרחה ברחוב 36/37 עד Lexington.', m:'walk', how:'כ־15 דק׳ הליכה. אין צורך ברכבת.'},
+   {t:'08:30–17:00', h:'ORCA יום 1: הרצאות, נטוורקינג, צהריים', img:'murray', p:'The Shelburne Sonesta, 303 Lexington Ave. קפה ב־08:30, הרצאות מ־09:00.', m:'', how:'', tag:'have', key:1},
+   {t:'11:00', h:'Drew Barrymore Show (מתנגש)', img:'', p:'רק אחרי Confirm וקבלת כרטיס. הזמנה אינה כרטיס.', m:'', how:'', tag:'tbd', alt:1},
+   {t:'17:00–19:15', h:'התרעננות והחלפת לוק', img:'', p:'', m:'walk', how:'המלון במרחק 15 דק׳ הליכה.'},
+   {t:'19:30–22:30', h:'ORCA מסיבת דיסקו', img:'', p:'מוזיקה ואוכל. כתובת TBD.', m:'taxi', how:'לפי הכתובת. בערב: מונית צהובה או Uber.', tag:'have', key:1}
+  ]},
+{ d:19, dow:'ה׳', short:'ORCA יום 2', title:'ORCA יום תוכן 2 וסיום', img:'murray', w:'16° / 12° נעים', sleep:'המלון במידטאון', sunset:'', orca:1,
+  alerts:['הכנס נגמר ב־18:00 (לא 17:00). פגישות רק מ־18:30.','לסגור עד הערב: איפה ישנות בליל 20–21.11 ומה עושים עם המזוודות.'],
+  liv:{t:'Business Casual · ערכה 3', items:['הבלייזר עם הטופ השלישי והמכנס השני'], why:'שילוב חדש מאותם פריטים: שלוש ערכות שונות מאותה קפסולה.'},
+  or:{t:'Business Casual · יום 2', items:['שמלת סריג או חצאית + סוודר דק','או מכנס מחויט שני + חולצה','הבלייזר מאתמול','נעליים נוחות, היום ארוך עד 18:00'], why:'קוד הלבוש של אורלי: מראה עסקי אלגנטי ונוח.'},
+  stops:[
+   {t:'08:00–08:20', h:'הליכה לכנס', img:'murray', p:'', m:'walk', how:'15 דק׳ הליכה.'},
+   {t:'08:30–18:00', h:'ORCA יום 2 וסיום הכנס', img:'murray', p:'כדאי להישאר עד הסוף: השיחות האחרונות פותחות דלתות.', m:'', how:'', tag:'have', key:1},
+   {t:'18:30–19:45', h:'פגישה אישית (רק אם נקבעה)', img:'', p:'', m:'subway', how:'', tag:'tbd'},
+   {t:'20:00–21:30', h:'ארוחת ערב או בר ג׳אז', img:'', p:'Village Vanguard אם יש כוח. עדיפות למנוחה לפני סטינג.', m:'subway', how:'קו 1 ל־Christopher St.', tag:'opt'}
+  ]},
+{ d:20, dow:'ו׳', short:'STING', title:'צ׳ק־אאוט ו־STING ב־Brooklyn Paramount', img:'paramount', w:'13° / 8° אפשר טפטוף', sleep:'לא נסגר! (TBD)', sunset:'',
+  alerts:['להביא ליעקב את הכסף על כרטיסי סטינג.','StubHub: אם הכרטיסים לא הגיעו עד 16:00, לפנות מיד לתמיכה. Section 8, Row FF, Seats 5–7 (לאמת).','אין להיכנס לאולם עם מזוודה. כל התיקים נבדקים.','מקום לינה לליל 20–21.11 ומזוודות: עדיין לא סגור.'],
+  liv:{t:'בוקר רשמי, ערב קונצרט', items:['בבוקר: מכנס אלגנט + סריג + נעל נוחה','לערב: ג׳ינס + טופ + המעיל','מעיל שקל להוריד, תיק לא גדול'], why:'המזוודות כבר בדרך, אז ערכת הערב יוצאת בבוקר בתיק היד.'},
+  or:{t:'לוק קונצרט', items:['ג׳ינס + טופ יפה + ז׳קט עור או בלייזר','נעליים נוחות לעמידה','תיק קטן (בידוק)','המעיל שקל להוריד ולהחזיק'], why:'שעות עמידה ובידוק בכניסה.'},
+  stops:[
+   {t:'07:30–08:30*', h:'אריזה וצ׳ק־אאוט מהמלון', img:'herald', p:'לסגור את החדר מוקדם בגלל הסיור באו״ם. לברר שמירת מזוודות בקבלה.', m:'uber', how:'אם המזוודות עוברות ל־NJ: Uber XL ישר ל־Scotch Plains (הערכה $100–140), או רכב משפחה. אחרת משאירות בקבלה ואוספות לפני סטינג.', key:1},
+   {t:'09:00–12:00', h:'ליבנת: סיור ORCA באו״ם', img:'murray', p:'יש בדיקת ביטחון: מעיל שקל להוריד ותיק לא גדול. אור יכולה להצטרף אם רשומה, או ללכת ל־Frick.', m:'taxi', how:'מטה האו״ם ב־1st Ave & 46th St. מונית צהובה מהמלון 10–15 דק׳ ($12–18), או קו 7 ל־Grand Central ואז הליכה.', tag:'have'},
+   {t:'11:00–12:30', h:'The Frick Collection', img:'frick', p:'רק אם המזוודות מסודרות. $30.', m:'subway', how:'קו 6 ל־68 St, או מונית ($15–20).', tag:'book', link:'https://www.frick.org/tickets', alt:1},
+   {t:'12:30–14:00', h:'צהריים ו־Madison Avenue', img:'madison', p:'', m:'walk', how:''},
+   {t:'14:00–16:15', h:'נסיעה ל־Fort Greene', img:'fortgreene', p:'פארק ורחובות השכונה.', m:'subway', how:'קו Q מ־Lexington/63 St או B/Q מ־Herald Sq עד DeKalb Av. בלי מזוודות.'},
+   {t:'עד 16:00', h:'לבדוק ש־StubHub מסר את כרטיסי סטינג', img:'', p:'', m:'', how:'', tag:'tbd'},
+   {t:'16:30–18:30', h:'ארוחת ערב מוקדמת ליד האולם', img:'', p:'אלרגיה: לאשר רכיבים וזיהום צולב מראש.', m:'walk', how:''},
+   {t:'19:00 דלתות · 20:00 מופע', h:'STING 3.0 Tour', img:'paramount', p:'Brooklyn Paramount, 385 Flatbush Ave Extension. Fiction Plane בחימום.', m:'walk', how:'תחנת DeKalb Av (B/Q/R), 3 דק׳ הליכה.', tag:'have', link:'https://www.brooklynparamount.com/visit', key:1},
+   {t:'אחרי המופע', h:'חזרה ליעד הלינה', img:'', p:'', m:'uber', how:'אחרי הופעה יש surge במחירי Uber. לחכות 15 דק׳ או ללכת 2 בלוקים. ל־NJ בלילה: Uber, הערכה $100–150. למנהטן: קו B/Q.'}
+  ]},
+{ d:21, dow:'ש׳', short:'Met + פארק', title:'The Met, סנטרל פארק ו־Knicks', img:'met', w:'10° / 6° קריר', sleep:'TBD', sunset:'16:33',
+  alerts:['לבחור מסלול אחד: Met + פארק + Knicks, או פילדלפיה.','Knicks נגד Portland 19:30: לא נקנה. אופציונלי.'],
+  liv:{t:'יום הליכה אחרון', items:['נעלי ההליכה','המעיל','סוודר + שכבות','אותו לוק נוח גם למשחק בערב'], why:''},
+  or:{t:'יום הליכה + משחק', items:['ג׳ינס + סוודר + מעיל','נעלי הליכה','אביזר כתום או כחול למשחק, בשביל הכיף'], why:''},
+  stops:[
+   {t:'10:00–11:00*', h:'יציאה ל־Upper East Side', img:'', p:'תלוי איפה ישנות.', m:'njt', how:'מ־NJ: NJ Transit ל־Penn ואז קו 4/5/6 ל־86 St. ממנהטן: subway.'},
+   {t:'11:00–13:15', h:'The Met', img:'met', p:'$30 למבוגרת מחוץ לניו יורק.', m:'walk', how:'', tag:'book', link:'https://www.metmuseum.org/plan-your-visit', key:1},
+   {t:'14:00–14:50', h:'Neue Galerie (אופציה)', img:'neue', p:'קלימט. Café Sabarsky: עוגות רבות עם ביצים!', m:'walk', how:'5th Ave & 86th.', tag:'opt'},
+   {t:'15:00–16:15', h:'Central Park: Bethesda Terrace ו־Bow Bridge', img:'bethesda', p:'אור אחרון לפני שקיעה ב־16:33.', m:'walk', how:'הליכה בפארק. אם קר מדי: מונית צהובה.', tag:'free', key:1},
+   {t:'17:30–18:45', h:'ארוחת ערב ליד MSG', img:'', p:'', m:'subway', how:'קו 1/2/3 ל־34 St–Penn.'},
+   {t:'19:30–22:00*', h:'Knicks vs Portland ב־Madison Square Garden', img:'msg', p:'', m:'walk', how:'', tag:'opt', link:'https://www.msg.com/events-tickets/new-york-knicks-madison-square-garden-november-2026/3B006511E9208636'}
+  ]},
+{ d:22, dow:'א׳', short:'טיסה הביתה', title:'אריזה וטיסה הביתה', img:'jfk', w:'12° / 5° (ממוצע עונתי)', sleep:'בטיסה', sunset:'',
+  alerts:['להגיע ל־JFK סביב 15:30. לא לנסוע למנהטן בבוקר.','לבדוק טרמינל של Arkia באפליקציה בבוקר.'],
+  liv:{t:'לוק נסיעה', items:['לובשים למטוס את הכבדים: המעיל החם והמגפון','לוק נסיעה נוח כמו בדרך הלוך'], why:'חוסכים משקל ומקום במזוודה לקניות.'},
+  or:{t:'לוק נסיעה', items:['הנעליים הכבדות והמעיל על הגוף','מכנס נוח + סוודר','אפיפנים ותרופות בתיק היד'], why:'אותו טריק אריזה.'},
+  stops:[
+   {t:'08:30–12:00', h:'ארוחת בוקר, אריזה, טיול קצר', img:'', p:'', m:'', how:''},
+   {t:'12:00–15:30*', h:'נסיעה ל־JFK', img:'jfk', p:'יום ראשון אחה״צ, תנועה כבדה לכיוון השדה.', m:'uber', how:'מ־Scotch Plains: רכב משפחה או Uber XL (להזמין Reserve ל־13:30–14:00). 1:15–1:45 שעות, הערכה $110–160. מונית צהובה מ־NJ לא מומלצת.', key:1},
+   {t:'18:55', h:'Arkia IZ992 הביתה', img:'jfk', p:'נחיתה משוערת בנתב״ג: 23.11 בסביבות 12:30 שעון ישראל.', m:'', how:'', tag:'have', key:1}
+  ]}
+];
+
+/* ---------------- CHECKLISTS ---------------- */
+const BEFORE = [
+ {g:'היום, לפני ההמראה', items:[
+  ['esta','ESTA מאושר לשתינו','לוודא באתר esta.cbp.dhs.gov שהאישור בתוקף ותואם לדרכון. העתק בתיקיית ESTA בדרייב.',1],
+  ['pass','דרכונים בתוקף','ביד, לא במזוודה.',1],
+  ['cdc','הצהרת CDC (אי־שהייה בקונגו ב־21 ימים)','חובה מאז 3.11. לבדוק מול ארקיע איפה ממלאים: בקישור, בצ׳ק־אין או בדלפק.',1],
+  ['esim','לרכוש eSIM לארה״ב ולהתקין עכשיו','חבילת דאטה ל־15+ ימים (10–20GB או ללא הגבלה), למשל Airalo, Holafly, Saily או חבילת חו״ל של החברה הישראלית. מתקינים בבית על Wi‑Fi, מפעילים "נדידה" לקו ה־eSIM רק בנחיתה. הסים הישראלי נשאר פעיל לקבלת SMS מהבנק, עם דאטה כבוי.',1],
+  ['epi','מזרקי אפיפן בתיק היד','לפחות 2 לכל מי שצריכה, לא במזוודה. מכתב רופא באנגלית. לשמור בטמפרטורת חדר: לא להשאיר ברכב קר.',1],
+  ['yaakov','כסף ליעקב על כרטיסי סטינג','להביא איתנו במזומן/להעביר. הסכום:',1,'amount'],
+  ['ins','ביטוח נסיעות הראל','להוריד פוליסה מלאה, לוודא 8–22.11, ארה״ב, ומה מכוסה במצב רפואי קיים ואלרגיה. לשמור את מספר המוקד בטלפון.',1],
+  ['tix','כרטיסי טיסה FlyAll / Arkia','לשמור e-ticket אופליין. להגיע לנתב״ג 3 שעות לפני.',1],
+  ['checkin','צ׳ק־אין אונליין לטיסה','אם ארקיע מאפשרת: לבחור מושבים יחד ולשמור כרטיס עלייה בטלפון.',1],
+  ['pickup','איסוף מ־JFK ב־05:30','לתאם עם המשפחה, או להזמין Uber Reserve מראש. ולבקש את הכתובת המדויקת ב־Scotch Plains.',1],
+  ['cash','דולרים במזומן','$100–200 בשטרות קטנים לטיפים ולמקרים שאין כרטיס.',0],
+  ['cards','2 כרטיסי אשראי + Apple/Google Pay','הטלפון עם Apple Pay משמש ככרטיס לסאבוויי (OMNY).',0]
+ ]},
+ {g:'להזמין לפני שזה נגמר', items:[
+  ['summit','SUMMIT 9.11 ב־15:15–15:30','2 כרטיסי SUMMIT Experience, החל מ־$44 לאדם.',1],
+  ['statue','Statue City Cruises 11.11 בבוקר','2 General Admission, יציאה מ־Battery Park. רק באתר הרשמי.',1],
+  ['rockettes','Rockettes 15.11 ב־17:00','להחליט, ואם כן, 2 מושבים צמודים.',0],
+  ['amtrak','Amtrak + Library of Congress ל־12.11','MET → WAS, 2 מבוגרות (נדחה לבקשתך).',0],
+  ['morgan','Morgan Library 13.11','לפתוח את הקישור בדרייב ולבדוק שעה מול Whitney 17:30.',0],
+  ['frick','Frick 20.11 / Met 21.11','רק אחרי שסוגרות לינה ומזוודות.',0]
+ ]},
+ {g:'החלטות פתוחות', items:[
+  ['lodge','לינה בליל 20–21.11 ומזוודות','המלון עד 20.11 בלבד. חוזרות למשפחה? מתי מעבירים מזוודות?',1],
+  ['drew','Drew Barrymore או ORCA ב־18.11','Confirm רק אם בוחרות Drew.',0],
+  ['pilot','הפיילוט של שלי 16.11','לבקש כתובת ולוודא שאור מוזמנת.',0],
+  ['disco','כתובת מסיבת הדיסקו של ORCA','לבקש מצוות הכנס.',0],
+  ['orcaapp','ORCA Connections','להשלים פרופיל ולסמן מכרות עד 11.11.',0],
+  ['day21','21.11: ניו יורק או פילדלפיה','לבחור מסלול אחד.',0],
+  ['bni','ביקור BNI של אמא 10.11','שעה ומקום.',0],
+  ['rosita','רוזיטה של אמא 18.11','שעה ומקום, מול הדיסקו.',0]
+ ]},
+ {g:'להוריד לטלפון', items:[
+  ['apps','אפליקציות','Uber, Lyft, NJ Transit, Amtrak, StubHub, NYC Ferry, Google Maps (עם מפה אופליין של ניו יורק), WhatsApp.',0],
+  ['offline','מסמכים אופליין','כרטיסי Whitney PDF, אישור Booking של המלון, מדריך ORCA, פוליסת ביטוח, כרטיס אלרגיה.',0],
+  ['shareloc','לשתף מיקום זו עם זו','בוואטסאפ: מיקום חי לכל משך הטיול. ונקודת מפגש קבועה אם נפרדות.',0],
+  ['insnum','מספר מוקד הביטוח באפליקציה','להעתיק מהפוליסה ללשונית "מידע", שיהיה לשתיכן.',0],
+  ['baggage','משקל כבודה מותר בארקיע','לבדוק בכרטיס כמה ק״ג מותר, ולהשאיר מקום לקניות בחזור.',0],
+  ['bank','להודיע לבנק / להפעיל שימוש בחו״ל','שהכרטיס לא ייחסם בעסקה הראשונה בארה״ב.',0]
+ ]}
+];
+
+const PACK = [
+ {g:'בתיק היד, לא במזוודה', items:[
+  ['p-epi','מזרקי אפיפן (2 לפחות לכל אחת שצריכה)','+ מכתב רופא באנגלית'],
+  ['p-meds','תרופות קבועות באריזה המקורית + מרשם באנגלית',''],
+  ['p-anti','אנטיהיסטמין',''],
+  ['p-docs','דרכונים, ESTA, ביטוח, כרטיסי טיסה',''],
+  ['p-pb','מטען נייד (פאוורבנק)','רק בתיק היד, אסור במזוודה'],
+  ['p-layer','שכבה חמה לנחיתה','בחוץ 3° בחמש בבוקר'],
+  ['p-snack','חטיפים בלי ביצים','לטיסה ולימים ארוכים'],
+  ['p-env','מעטפה עם הכסף ליעקב',''],
+  ['p-change','סט בגדים להחלפה',''],
+ ]},
+ {g:'בריאות וחירום', items:[
+  ['p-card','כרטיס אלרגיה באנגלית למלצרים','"Severe egg allergy, including cross-contamination. I carry epinephrine."'],
+  ['p-pain','משככי כאבים, פלסטרים, מדבקות לשלפוחיות',''],
+  ['p-lip','שפתון לחות וקרם ידיים','קור ורוח יבשים'],
+  ['p-san','ג׳ל לחיטוי ידיים',''],
+ ]},
+ {g:'אלקטרוניקה', items:[
+  ['p-adapt','מתאם חשמל לארה״ב (Type A/B)','ברשימה של אורלי'],
+  ['p-chg','מטענים וכבלים',''],
+  ['p-lap','מחשב או מחברת לכנס','ברשימה של אורלי'],
+  ['p-zoom','לאמא לזום: מחשב, מטען, אוזניות עם מיקרופון','10.11 ו־17.11'],
+  ['p-bc','כרטיסי ביקור או QR דיגיטלי','ברשימה של אורלי'],
+ ]},
+ {g:'קפסולת הבגדים (לפי התוכנית של ליבנת)', items:[
+  ['c-coat','מעיל חם ארוך, עדיף עמיד למים','הכוכב של הטיול'],
+  ['c-blazer','בלייזר אלגנט','מכסה ORCA, פיילוט ו־BNI'],
+  ['c-sweat','2–3 סוודרים או גולפים דקים','לשכבות'],
+  ['c-therm','2 חולצות תרמיות ארוכות','לימים הקרים 12–15.11'],
+  ['c-tops','4 טופים לעסקי','צבע אחיד בוהק לטלוויזיה, נוצץ או סאטן למסיבה, ושניים מחויטים'],
+  ['c-pants','2 מכנסי אלגנט כהים','משתלבים בכל'],
+  ['c-jeans','ג׳ינס + מכנס נוח','לימי הליכה וטיסות'],
+  ['c-dress','שמלת ג׳רסי + גרביון','אופציונלי, לקוקטייל או לרדיו סיטי'],
+  ['c-walk','נעלי הליכה נוחות עמידות למים','הנעל הראשית'],
+  ['c-boot','מגפון אלגנט בעקב נמוך','לכנס ולערבים'],
+  ['c-acc','צעיף, כובע, כפפות','חובה לאמצע הטיול'],
+  ['c-bag','תיק יד מרווח + מטרייה מתקפלת',''],
+ ]},
+ {g:'לפי קוד הלבוש של אורלי (ORCA)', items:[
+  ['o-bc','בגדי Business Casual ל־3 ימים','נוח, אלגנטי, מתאים לימים עמוסים'],
+  ['o-party','למסיבה: ג׳ינס, נעלי ספורט ופריט מנצנץ','ז׳קט פאייטים משנות ה־80, אביזרים נוצצים'],
+  ['o-weather','מעיל, צעיף ונעליים נוחות','נובמבר בניו יורק יכול להיות קריר, לפעמים סוער'],
+  ['o-id','תעודה מזהה לקוקטייל 17.11','חובה בכניסה ל־7 WTC'],
+ ]},
+ {g:'טואלטיקה', items:[
+  ['t-liq','נוזלים עד 100 מ״ל בתיק היד, בשקית שקופה',''],
+  ['t-basic','מברשת, משחה, דאודורנט, טיפוח, איפור',''],
+  ['t-hair','מחליק/מייבש: לבדוק מתח 110V','במלון יש מייבש לרוב'],
+ ]}
+];
+
+/* ---------------- RENDER HELPERS ---------------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem('nyc26:'+k); return v === null ? d : JSON.parse(v); }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem('nyc26:'+k, JSON.stringify(v)); }catch(e){} }
+};
+const ICON = {
+  sun:'<svg viewBox="0 0 24 24"><path d="M17.5 19a4.5 4.5 0 1 0-1.4-8.8A6 6 0 0 0 4 12.5 3.5 3.5 0 0 0 6.5 19z"/></svg>',
+  bed:'<svg viewBox="0 0 24 24"><path d="M3 18V7M3 14h18v4M21 14v-3a3 3 0 0 0-3-3h-7v6"/><circle cx="7" cy="11" r="2"/></svg>',
+  set:'<svg viewBox="0 0 24 24"><path d="M3 18h18M7 14a5 5 0 0 1 10 0M12 4v3M5 8l2 2M19 8l-2 2"/></svg>',
+  img:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 16l5-5 4 4 3-3 6 6"/></svg>'
+};
+function modeChip(m){ if(!m || !MODES[m]) return ''; const [b,l]=MODES[m]; return `<span class="mode m-${m}"><i>${b}</i>${l}</span>`; }
+function tagPill(t){ if(!t||!TAG[t]) return ''; const [c,l]=TAG[t]; return `<span class="pill ${c}">${l}</span>`; }
+
+function nyNow(){
+  const p = new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',year:'numeric',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date());
+  const o={}; p.forEach(x=>o[x.type]=x.value); return {y:+o.year,m:+o.month,d:+o.day,h:o.hour,mi:o.minute};
+}
+function fmtClock(tz){ return new Intl.DateTimeFormat('he-IL',{timeZone:tz,hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date()); }
+function tick(){ $('#nyClock').textContent=fmtClock('America/New_York'); $('#ilClock').textContent=fmtClock('Asia/Jerusalem'); const c=document.getElementById('cd'); if(c) renderCountdown(c); }
+
+/* ---------------- VIEWS ---------------- */
+function flightsHTML(){
+  return `
+  <div class="card"><div class="fhead"><h3>הלוך · Arkia IZ991</h3><span class="pill p-ok">כרטיס קיים · FlyAll</span></div>
+    <div class="flight"><div class="end"><span class="code">TLV</span><span class="t">7.11 · ~23:30*</span><span class="muted" style="font-size:13px">שעון ישראל</span></div>
+      <div class="mid"><svg viewBox="0 0 56 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 9h50M46 4l6 5-6 5"/></svg>~12 שעות</div>
+      <div class="end"><span class="code">JFK</span><span class="t">8.11 · 04:55</span><span class="muted" style="font-size:13px">שעון ניו יורק (11:55 בישראל)</span></div></div>
+    <p class="muted" style="font-size:13px;margin:10px 0 0">* שעת ההמראה מנתב״ג לא מופיעה בקובץ, היא מחושבת לאחור משעת הנחיתה. לבדוק בכרטיס ולהגיע 3 שעות לפני.</p></div>
+  <div class="card"><div class="fhead"><h3>וושינגטון · Amtrak</h3><span class="pill p-bad">לא הוזמן</span></div>
+    <div class="flight"><div class="end"><span class="code">MET</span><span class="t">12.11 · בוקר</span><span class="muted" style="font-size:13px">Metropark, NJ</span></div>
+      <div class="mid"><svg viewBox="0 0 56 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 9h50M46 4l6 5-6 5"/></svg>~2.5–3 שעות</div>
+      <div class="end"><span class="code">WAS</span><span class="t">יעד 09:30–10:00</span><span class="muted" style="font-size:13px">Union Station</span></div></div></div>
+  <div class="card"><div class="fhead"><h3>חזור · Arkia IZ992</h3><span class="pill p-ok">כרטיס קיים · FlyAll</span></div>
+    <div class="flight"><div class="end"><span class="code">JFK</span><span class="t">22.11 · 18:55</span><span class="muted" style="font-size:13px">להגיע 15:30</span></div>
+      <div class="mid"><svg viewBox="0 0 56 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 9h50M46 4l6 5-6 5"/></svg>~10.5 שעות</div>
+      <div class="end"><span class="code">TLV</span><span class="t">23.11 · ~12:30*</span><span class="muted" style="font-size:13px">שעון ישראל, משוער</span></div></div></div>`;
+}
+
+const LAND = Date.parse('2026-11-08T04:55:00-05:00');
+function renderCountdown(el){
+  let ms = LAND - Date.now();
+  if(ms<=0){ el.innerHTML='<div><b>✓</b><span>נחתנו</span></div>'; return; }
+  const d=Math.floor(ms/864e5), h=Math.floor(ms%864e5/36e5), m=Math.floor(ms%36e5/6e4);
+  el.innerHTML=`<div><b>${d}</b><span>ימים</span></div><div><b>${h}</b><span>שעות</span></div><div><b>${m}</b><span>דקות</span></div>`;
+}
+
+function renderToday(){
+  const n = nyNow();
+  const inTrip = n.y===2026 && n.m===11 && n.d>=8 && n.d<=22;
+  const v = $('#v-today');
+  if(inTrip){
+    const day = DAYS.find(x=>x.d===n.d);
+    const nowMin = (+n.h)*60 + (+n.mi);
+    const next = day.stops.find(s=>{ const m=(s.t||'').match(/(\d{1,2}):(\d{2})/); return m && (+m[1]*60 + +m[2]) >= nowMin - 30; }) || day.stops[day.stops.length-1];
+    v.innerHTML = `
+      <div class="hero"><div class="ph" style="background-image:url('${IMG(day.img)}')"></div><div class="in">
+        <span class="eyebrow" style="color:#B7C0CE">היום · יום ${day.dow} ${day.d}.11</span><h2>${esc(day.title)}</h2>
+        <div class="facts">${factsHTML(day)}</div></div></div>
+      <div class="card"><span class="eyebrow">הבא בתור</span>${stopHTML(next)}</div>
+      ${day.alerts.length?`<div style="display:grid;gap:8px">${day.alerts.map(a=>`<div class="note">${esc(a)}</div>`).join('')}</div>`:''}
+      <div class="acts"><button class="act go" type="button" onclick="showAllergy()">כרטיס אלרגיה למלצר</button></div>
+      <div class="grid2">${outfitHTML('l',day.liv,day.orca)}${outfitHTML('o',day.or,day.orca)}</div>
+      ${bagHTML(day)}
+      <button class="card" style="font:inherit;color:inherit;cursor:pointer;text-align:start" onclick="openDay(${day.d})"><b>לכל הלו״ז של היום ←</b></button>`;
+    bindChecks(v);
+    return;
+  }
+  const urgent = BEFORE[0].items;
+  const done = getDone();
+  const left = urgent.filter(i=>!done[i[0]]);
+  v.innerHTML = `
+    <div class="hero"><div class="ph" style="background-image:url('${IMG('skyline')}')"></div><div class="in">
+      <span class="eyebrow" style="color:#B7C0CE">עד הנחיתה ב־JFK</span><h2>אור וליבנת בדרך לניו יורק</h2>
+      <div class="count" id="cd"></div></div></div>
+    <div class="sec-h"><h2>לסגור לפני ההמראה</h2><span class="muted">${urgent.length-left.length} / ${urgent.length}</span></div>
+    <div class="card chk">${urgent.map(i=>chkHTML(i,done,true)).join('')}</div>
+    <div class="sec-h"><h2>הטיסות</h2></div>
+    ${flightsHTML()}
+    <button class="card" style="font:inherit;color:inherit;cursor:pointer;text-align:start" onclick="openDay(8)"><b>יום ראשון בניו יורק ←</b><br><span class="muted">נחיתה 04:55, מעבר ל־Scotch Plains ומנוחה</span></button>`;
+  renderCountdown($('#cd'));
+  bindChecks(v);
+}
+
+function factsHTML(day){
+  const city = day.d===12 ? 'Washington DC' : 'New York';
+  return `<a class="fact" style="color:inherit;text-decoration:none" href="${esc(googleUrl(`weather ${city} November ${day.d}`))}" target="_blank" rel="noopener" title="תחזית עדכנית">${ICON.sun}${esc(day.w)}${day.feel?` · ${esc(day.feel)}`:''} <span style="color:var(--info);font-weight:700">· תחזית עדכנית ↗</span></a>
+    <span class="fact">${ICON.bed}${esc(day.sleep)}</span>
+    ${day.sunset?`<span class="fact">${ICON.set}שקיעה <span class="mono">${esc(day.sunset)}</span></span>`:''}`;
+}
+function outfitHTML(who, o, orca){
+  return `<div class="card outfit"><div class="who"><span class="av ${who}">${who==='l'?'ל':'א'}</span><b>${who==='l'?'ליבנת':'אור'}</b><span class="muted">· ${esc(o.t)}</span>${orca?'<span class="code-badge">BUSINESS CASUAL</span>':''}</div>
+    <ul>${o.items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul>${o.why?`<div class="why">${esc(o.why)}</div>`:''}</div>`;
+}
+function stopHTML(s){
+  const im = s.img ? `<div class="img" style="background-image:url('${IMG(s.img)}')" role="img" aria-label="${esc(s.h)}"></div>` : `<div class="img none">${ICON.img}</div>`;
+  return `<article class="stop${s.alt?' alt':''}${s.key?' key':''}">${im}<div class="body">
+    <div class="row1">${s.t?`<span class="time">${esc(s.t)}</span>`:''}${tagPill(s.tag)}</div>
+    <h3>${esc(s.h)}</h3>${s.p?`<p>${esc(s.p)}</p>`:''}
+    ${s.m||s.how?`<div class="how">${modeChip(s.m)}<span class="txt">${esc(s.how)}</span></div>`:''}
+    ${stopActs(s)}
+  </div></article>`;
+}
+/* place queries for Google Maps / Uber, keyed by the stop's photo */
+const PLACE = {
+  jfk:'JFK Airport, Queens, NY', scotch:'Scotch Plains, NJ', gct:'Grand Central Terminal, New York', bryant:'Bryant Park, New York',
+  nbc:'Rockefeller Center, New York', summit:'SUMMIT One Vanderbilt, New York', kelly:'281 Spring St, New York, NY', soho:'SoHo, New York',
+  wsp:'Washington Square Park, New York', skyline:'Battery Park, New York', liberty:'Statue City Cruises, Battery Park, New York', ellis:'Ellis Island',
+  wall:'Wall Street, New York', memorial:'9/11 Memorial, New York', oculus:'Oculus, World Trade Center, New York', seaport:'Pier 17, New York',
+  metropark:'Metropark Station, Iselin, NJ', union:'Union Station, Washington, DC', capitol:'U.S. Capitol, Washington, DC', loc:'Thomas Jefferson Building, Library of Congress, Washington, DC',
+  amhist:'National Museum of American History, Washington, DC', wmon:'Washington Monument, Washington, DC', lincoln:'Lincoln Memorial, Washington, DC',
+  vessel:'Vessel, Hudson Yards, New York', highline:'High Line, 34th St entrance, New York', chelsea:'Chelsea Market, New York', little:'Little Island, New York',
+  whitney:'Whitney Museum of American Art, New York', bbridge:'Brooklyn Bridge pedestrian entrance, Centre St, New York', dumbo:'Washington Street, DUMBO, Brooklyn',
+  carousel:"Jane's Carousel, Brooklyn", promenade:'Brooklyn Heights Promenade, Brooklyn', ferry:'NYC Ferry DUMBO/Fulton Ferry Landing, Brooklyn', wburg:'Bedford Ave, Williamsburg, Brooklyn',
+  domino:'Domino Park, Brooklyn', herald:'Herald Square, New York', poster:'Poster House, 119 W 23rd St, New York', stpat:"St. Patrick's Cathedral, New York",
+  fifth:'Fifth Avenue, New York', radio:'Radio City Music Hall, New York', murray:'The Shelburne Sonesta, 303 Lexington Ave, New York', tram:'Roosevelt Island Tramway, 59th St, New York',
+  moma:'MoMA, New York', wtc7:'7 World Trade Center, 250 Greenwich St, New York', frick:'The Frick Collection, New York', madison:'Madison Avenue & 70th St, New York',
+  fortgreene:'Fort Greene Park, Brooklyn', paramount:'Brooklyn Paramount, 385 Flatbush Ave Ext, Brooklyn', met:'The Metropolitan Museum of Art, New York', neue:'Neue Galerie, New York',
+  bethesda:'Bethesda Terrace, Central Park, New York', msg:'Madison Square Garden, New York'
+};
+const TRAVEL = {walk:'walking', subway:'transit', njt:'transit', amtrak:'transit', ferry:'transit', uber:'driving', taxi:'driving', car:'driving'};
+function mapsUrl(q, m){ return 'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(q)+(m&&TRAVEL[m]?'&travelmode='+TRAVEL[m]:''); }
+function uberUrl(q){ return 'https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]='+encodeURIComponent(q); }
+function googleUrl(q){ return 'https://www.google.com/search?q='+encodeURIComponent(q); }
+function stopActs(s){
+  const q = s.nav || PLACE[s.img];
+  const a = [];
+  if(q) a.push(`<a class="act go" href="${esc(mapsUrl(q,s.m))}" target="_blank" rel="noopener">ניווט</a>`);
+  if(q && (s.m==='uber'||s.m==='taxi'||s.m==='car')) a.push(`<a class="act" href="${esc(uberUrl(q))}" target="_blank" rel="noopener">הזמנת Uber</a>`);
+  if(s.link) a.push(`<a class="act" href="${esc(s.link)}" target="_blank" rel="noopener">אתר רשמי ↗</a>`);
+  if(q) a.push(`<a class="act" href="${esc(googleUrl(q+' hours today'))}" target="_blank" rel="noopener">שעות פתיחה</a>`);
+  return a.length ? `<div class="acts">${a.join('')}</div>` : '';
+}
+
+/* what goes in the day bag + evening routine */
+const BAG_EXTRA = {
+  8:['דרכונים + ESTA','כרטיסי טיסה','כתובת המשפחה ב־Scotch Plains','שכבה חמה לנחיתה'],
+  9:['כרטיסי SUMMIT (אם נקנו)','משקפי שמש לחדרי המראות'],
+  10:['כרטיס LIVE + תעודה מזהה','לאמא: מחשב + אוזניות לזום 11:15'],
+  11:['כרטיסי המעבורת','תיק קטן (בידוק ביטחוני)','מטרייה'],
+  12:['כרטיסי Amtrak','כרטיס Library of Congress','תעודה מזהה','תיק קטן (בידוק בקפיטול)'],
+  13:['Whitney PDF עם 2 הברקודים','טופ יפה או עגילים לערב'],
+  14:['אפליקציית NYC Ferry','כפפות, כובע, צעיף'],
+  15:['אישור Booking של המלון','כרטיסי Rockettes (אם נקנו)','כל המזוודות'],
+  16:['כתובת הפיילוט','כרטיס Seth (אם אושר)'],
+  17:['דרכון: חובה לכניסה ל־7 WTC','כרטיסי ביקור / QR לינקדאין','לאמא: מחשב לזום 11:15'],
+  18:['נעלי ספורט + ז׳קט נוצץ לדיסקו','כרטיסי ביקור','כתובת המסיבה'],
+  19:['כרטיסי ביקור','מטען לטלפון'],
+  20:['כרטיסי STING ב־StubHub','הכסף ליעקב','תיק קטן בלבד','מזוודות: מסודרות לפני היציאה מהמלון'],
+  21:['כרטיסי Met / Knicks (אם נקנו)'],
+  22:['דרכונים','כרטיס עלייה למטוס','אפיפנים ותרופות בתיק היד']
+};
+function bagItems(day){
+  const base = [['epi','2 מזרקי אפיפן'],['anti','אנטיהיסטמין'],['ph','טלפון טעון + פאוורבנק'],['card','אשראי / Apple Pay'],['water','בקבוק מים']];
+  const m = (day.w||'').match(/(\d+)°\s*\/\s*(\d+)°/); const lo = m ? +m[2] : 10;
+  if(/טפטוף/.test(day.w) && !(BAG_EXTRA[day.d]||[]).some(x=>/מטרייה/.test(x))) base.push(['umb','מטרייה מתקפלת']);
+  if(lo<=5 && !(BAG_EXTRA[day.d]||[]).some(x=>/כפפות/.test(x))) base.push(['cold','כפפות, כובע, צעיף']);
+  (BAG_EXTRA[day.d]||[]).forEach((t,i)=>base.push(['x'+i,t]));
+  return base.map(([k,t])=>[`bag-${day.d}-${k}`, t, '']);
+}
+function eveningItems(day){
+  if(day.d>=22) return [];
+  const nx = DAYS.find(x=>x.d===day.d+1);
+  const it = [['ev-'+day.d+'-wx','לבדוק מזג אוויר למחר', nx?`צפי: ${nx.w}`:'']];
+  if(day.d<=14 || day.d>=20) it.push(['ev-'+day.d+'-njt','לבדוק את הרכבת של מחר באפליקציית NJ Transit', day.d===13||day.d===19?'מחר סופ״ש: לוח זמנים אחר':'']);
+  if(day.d===21) it.push(['ev-21-checkin','צ׳ק־אין אונליין ל־IZ992 + לשקול את המזוודות','טיסה מחר 18:55; להשאיר מקום לקניות בתוך המשקל המותר']);
+  if(day.d===19) it.push(['ev-19-pack','לארוז הכל לצ׳ק־אאוט של מחר','ולהחליט סופית מה עושים עם המזוודות לפני סטינג']);
+  if([8,9,11,19].includes(day.d)) it.push(['ev-'+day.d+'-uber','להזמין Uber Reserve לבוקר', 'יציאה מוקדמת מחר']);
+  it.push(['ev-'+day.d+'-chg','להטעין טלפונים ופאוורבנק',''], ['ev-'+day.d+'-tix','לשמור כרטיסים של מחר אופליין (צילום מסך)',''], ['ev-'+day.d+'-out','להכין את הבגדים של מחר', nx?`${nx.liv.t} / ${nx.or.t}`:'']);
+  return it;
+}
+function bagHTML(day){
+  const done=getDone(), ev=eveningItems(day);
+  return `<div class="grid2">
+    <div class="card"><div class="sec-h"><h3>מה בתיק היום</h3><span class="muted" style="font-size:13px">משותף</span></div><div class="chk">${bagItems(day).map(i=>chkHTML(i,done,true)).join('')}</div></div>
+    ${ev.length?`<div class="card"><div class="sec-h"><h3>בערב, לפני השינה</h3></div><div class="chk">${ev.map(i=>chkHTML(i,done,true)).join('')}</div></div>`:''}
+  </div>`;
+}
+
+/* restaurants from the Excel ("אוכל וברים"), with the allergy note for each */
+const FOOD = [
+  {d:9, n:'The Campbell', a:'Midtown East · בתוך Grand Central', w:'בר היסטורי מדהים', p:'$$$', s:'להודיע מראש על אלרגיה לביצים', u:'https://www.thecampbellnyc.com/', q:'The Campbell, Grand Central, New York'},
+  {d:10, n:'Balthazar', a:'SoHo', w:'ביסטרו ניו יורקי אייקוני, אווירה קולנועית. לבראנץ׳', p:'$$$', s:'מאפים ורטבים עשויים להכיל ביצים', u:'https://balthazarny.com/', q:'Balthazar, 80 Spring St, New York'},
+  {d:10, n:'Minetta Tavern', a:'Greenwich Village', w:'ניו יורק הישנה, קלאסי', p:'$$$–$$$$', s:'לבקש מהמטבח לאשר רכיבים וזיהום צולב', u:'https://www.minettatavernny.com/', q:'Minetta Tavern, New York'},
+  {d:11, n:'Manhatta', a:'Financial District', w:'נוף דרמטי מקומה 60', p:'$$$$', s:'לא חובה; יקר', u:'https://www.manhattarestaurant.com/', q:'Manhatta, 28 Liberty St, New York'},
+  {d:14, n:'The River Café', a:'DUMBO', w:'נוף אייקוני לגשר ברוקלין', p:'$$$$', s:'להזמין ולבדוק קוד לבוש', u:'https://rivercafe.com/', q:'The River Cafe, Brooklyn'},
+  {d:14, n:'Laser Wolf', a:'Williamsburg · על גג', w:'נוף מברוקלין, לפני השקיעה ב־Domino', p:'$$$', s:'לתאם מגבלות מזון מראש', u:'https://laserwolfbrooklyn.com/', q:'Laser Wolf Brooklyn'},
+  {d:15, n:'The Polo Bar', a:'Midtown', w:'אמריקה אלגנטית וקלאסית', p:'$$$$', s:'הזמנה קשה; לא להזיז את Rockettes בשבילו', u:'https://www.ralphlauren.com/the-polo-bar', q:'The Polo Bar, New York'},
+  {d:19, n:'Via Carota', a:'West Village', w:'איטלקי מדובר', p:'$$$', s:'לשאול על פסטה טרייה (לרוב עם ביצים)', u:'https://www.viacarota.com/', q:'Via Carota, New York'},
+  {d:19, n:'Village Vanguard', a:'West Village', w:'מוסד ג׳אז אגדי. אוכל בנפרד, לפני', p:'$$–$$$', s:'', u:'https://www.villagevanguard.com/', q:'Village Vanguard, New York'},
+  {d:21, n:'Café Sabarsky', a:'Upper East Side · Neue Galerie', w:'קפה וינאי יפהפה', p:'$$–$$$', s:'עוגות רבות עם ביצים: בדיקה קפדנית', u:'https://www.neuegalerie.org/cafesabarsky', q:'Cafe Sabarsky, New York'},
+  {d:21, n:'Bemelmans Bar', a:'Upper East Side · The Carlyle', w:'עיצוב אייקוני, לפעמים מוזיקה חיה', p:'$$$–$$$$', s:'קוקטיילים עם חלבון ביצה! לשאול', u:'https://www.rosewoodhotels.com/en/the-carlyle-new-york/dining/bemelmans-bar', q:'Bemelmans Bar, New York'},
+];
+function foodHTML(day){
+  const f = FOOD.filter(x=>x.d===day.d);
+  if(!f.length) return '';
+  return `<div class="sec-h"><h2>איפה אוכלים</h2><button class="act" type="button" onclick="showAllergy()">כרטיס אלרגיה</button></div>
+    <div class="grid2">${f.map(x=>`<div class="card" style="display:grid;gap:6px"><div class="sec-h"><h3>${esc(x.n)}</h3><span class="mono muted">${esc(x.p)}</span></div>
+      <span class="muted" style="font-size:14px">${esc(x.a)}</span><span>${esc(x.w)}</span>${x.s?`<span class="pill p-warn" style="white-space:normal;justify-self:start">${esc(x.s)}</span>`:''}
+      <div class="acts"><a class="act go" href="${esc(mapsUrl(x.q))}" target="_blank" rel="noopener">ניווט</a><a class="act" href="${esc(x.u)}" target="_blank" rel="noopener">אתר והזמנה ↗</a></div></div>`).join('')}</div>`;
+}
+
+let curDay = 8;
+function renderDays(){
+  const n = nyNow(); const today = (n.y===2026&&n.m===11)?n.d:0;
+  const day = DAYS.find(x=>x.d===curDay);
+  $('#v-days').innerHTML = `
+    <div class="strip" role="group" aria-label="בחירת יום">${DAYS.map(x=>`<button aria-pressed="${x.d===curDay}" class="${x.d===today?'is-today':''}" data-day="${x.d}"><span class="dn">${x.dow}</span><span class="dd">${x.d}.11</span><span class="dt">${esc(x.short)}</span></button>`).join('')}</div>
+    <div class="dayhead">
+      <div class="cover" style="background-image:url('${IMG(day.img)}')"><div class="cap"><span class="eyebrow">יום ${day.dow} · ${day.d} בנובמבר</span><h2>${esc(day.title)}</h2></div></div>
+      <div class="facts">${factsHTML(day)}</div>
+    </div>
+    ${day.alerts.length?`<div style="display:grid;gap:8px">${day.alerts.map(a=>`<div class="note${/כסף ליעקב|אפיפן/.test(a)?' bad':''}">${esc(a)}</div>`).join('')}</div>`:''}
+    <div class="sec-h"><h2>מה לובשות</h2>${day.orca?'<span class="muted" style="font-size:13px">קוד הלבוש של אורלי</span>':''}</div>
+    <div class="grid2">${outfitHTML('l',day.liv,day.orca)}${outfitHTML('o',day.or,day.orca)}</div>
+    ${bagHTML(day)}
+    <div class="sec-h"><h2>הלו״ז, צעד אחר צעד</h2></div>
+    <div class="legend">${['walk','subway','uber','taxi','njt'].map(modeChip).join('')}</div>
+    <div class="tl">${day.stops.map(stopHTML).join('')}</div>
+    ${foodHTML(day)}
+    <div style="display:flex;justify-content:space-between;gap:8px">
+      ${curDay>8?`<button class="card" style="font:inherit;color:inherit;cursor:pointer" data-day="${curDay-1}">→ ${curDay-1}.11</button>`:'<span></span>'}
+      ${curDay<22?`<button class="card" style="font:inherit;color:inherit;cursor:pointer" data-day="${curDay+1}">${curDay+1}.11 ←</button>`:''}
+    </div>`;
+  $('#v-days').querySelectorAll('[data-day]').forEach(b=>b.addEventListener('click',()=>{ curDay=+b.dataset.day; renderDays(); window.scrollTo({top:0}); try{history.replaceState(null,'','#day-'+curDay);}catch(e){} }));
+  bindChecks($('#v-days'));
+  const sel = $('#v-days .strip [aria-pressed="true"]'); if(sel) sel.scrollIntoView({inline:'center',block:'nearest'});
+}
+function openDay(d){ curDay=d; go('days'); try{history.replaceState(null,'','#day-'+d);}catch(e){} }
+
+function chkHTML(i, done, compact){
+  const [id,t,d,urg,extra] = i;
+  const amt = extra==='amount' ? `<span class="inline-input"><input id="amt-${id}" inputmode="decimal" placeholder="$ / ₪" value="${esc(getAmount())}" aria-label="סכום ליעקב"></span>` : '';
+  const by = done[id] && SYNC.by[id] && SYNC.names[SYNC.by[id]] ? `<span class="by">✓ ${esc(SYNC.names[SYNC.by[id]])}</span>` : '';
+  return `<label class="${done[id]?'done':''}"><input type="checkbox" id="c-${id}" data-k="${id}" ${done[id]?'checked':''}><span><span class="t">${esc(t)}</span>${by}${urg&&!compact?' <span class="urgent">דחוף</span>':''}${d?`<span class="d">${esc(d)}</span>`:''}${amt}</span></label>`;
+}
+function bindChecks(root){
+  root.querySelectorAll('input[type=checkbox][data-k]').forEach(c=>c.addEventListener('change',()=>{
+    setDone(c.dataset.k, c.checked);
+    c.closest('label').classList.toggle('done',c.checked); updateCounts(root);
+  }));
+  root.querySelectorAll('input[id^="amt-"]').forEach(inp=>{
+    inp.addEventListener('click',e=>e.preventDefault()); inp.addEventListener('input',()=>setAmount(inp.value));
+  });
+}
+function updateCounts(root){
+  root.querySelectorAll('[data-grp]').forEach(g=>{
+    const all=g.querySelectorAll('input[type=checkbox]'), on=[...all].filter(x=>x.checked).length;
+    const c=g.querySelector('.cnt'); if(c) c.textContent=`${on}/${all.length}`;
+  });
+  const all=root.querySelectorAll('input[type=checkbox]'), on=[...all].filter(x=>x.checked).length;
+  const bar=root.querySelector('.progress span'); if(bar) bar.style.width=(all.length?on/all.length*100:0)+'%';
+  const tot=root.querySelector('.tot'); if(tot) tot.textContent=`${on} מתוך ${all.length}`;
+}
+function listView(el, title, sub, groups, openFirst){
+  const done=getDone();
+  const openNow = [...el.querySelectorAll('details.grp')].map(d=>d.open);
+  el.innerHTML = `<div class="sec-h"><h2>${title}</h2><span class="muted tot"></span></div>
+    <div class="progress" aria-hidden="true"><span></span></div>${syncHTML()}
+    ${groups.map((g,ix)=>`<details class="grp" data-grp ${(openNow.length?openNow[ix]:ix<openFirst)?'open':''}><summary>${esc(g.g)}<span class="cnt"></span></summary><div class="chk">${g.items.map(i=>chkHTML(i,done)).join('')}</div></details>`).join('')}`;
+  bindChecks(el); updateCounts(el);
+}
+
+function renderDress(){
+  const rows = DAYS.map(d=>`<tr><td class="mono">${d.d}.11</td><td>${esc(d.w)}</td><td><b>${esc(d.liv.t)}</b><br>${esc(d.liv.items.join(' · '))}</td><td><b>${esc(d.or.t)}</b><br>${esc(d.or.items.join(' · '))}</td></tr>`).join('');
+  $('#v-dress').innerHTML = `
+    <div class="sec-h"><h2>קוד הלבוש של אורלי · ORCA</h2></div>
+    <div class="grid2">
+      <div class="card"><span class="code-badge">17.11 · קוקטייל</span><h3 style="margin-top:8px">Business Casual</h3><p>מכנסיים מחויטים עם חולצה יפה, שמלה, חצאית או בלייזר. כל שילוב שנותן מראה מקצועי ומוקפד. לא נדרש לבוש ערב רשמי. העיקר להרגיש נינוחה ובטוחה.</p><div class="note bad">חובה להגיע עם תעודה מזהה.</div></div>
+      <div class="card"><span class="code-badge">18–19.11 · ימי כנס</span><h3 style="margin-top:8px">Business Casual</h3><p>סגנון עסקי אלגנטי ונוח, מתאים ליום מלא בתוכן ובמפגשים. כדאי להגיע קצת לפני ההרצאות.</p></div>
+      <div class="card"><span class="code-badge">18.11 · דיסקו</span><h3 style="margin-top:8px">שנות ה־80</h3><p>ג׳ינס, נעלי ספורט והרבה מצב רוח טוב. ז׳קט פאייטים מנצנץ, אביזרים נוצצים וקצת גלאם יתקבלו בשמחה. מוגש אוכל.</p></div>
+      <div class="card"><span class="code-badge">מה לארוז לפי אורלי</span><ul style="margin:8px 0 0;padding-inline-start:18px"><li>בגדי Business Casual</li><li>בגדים למסיבה</li><li>מעיל, צעיף ונעליים נוחות</li><li>מחברת או מחשב, מטען, סוללה ניידת ומתאם חשמל</li><li>כרטיסי ביקור או פרטי קשר דיגיטליים</li></ul></div>
+    </div>
+    <div class="sec-h"><h2>טיפים מהתוכנית של ליבנת</h2></div>
+    <div class="grid2">
+      <div class="note">השכבות הן הסוד: הרחוב קר, הבניינים והרכבת התחתית מחוממים. כל יום בנוי מ־3 שכבות שקל לקלף.</div>
+      <div class="note">לטלוויזיה (10.11): צבע אחיד בוהק עובד הכי טוב. להימנע מלבן, משחור מלא ומפסים או משבצות עדינים.</div>
+      <div class="note">האו״ם (20.11 בתוכנית של ליבנת): מעיל שקל להוריד ותיק לא גדול, יש בדיקת ביטחון.</div>
+      <div class="note">טריק האריזה: לובשים למטוס את הכבדים (המעיל החם והמגפון).</div>
+    </div>
+    <div class="sec-h"><h2>כל הימים בטבלה</h2></div>
+    <div class="tbl"><table><thead><tr><th>יום</th><th>מזג אוויר</th><th>ליבנת</th><th>אור</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <p class="muted" style="font-size:13px;margin:0">התחזית נמשכה ב־6.11. לבדוק שוב יום־יומיים לפני, בעיקר לשבוע השני.</p>`;
+}
+
+/* ---------------- MONEY ---------------- */
+const MONEY = { shop:null, rate:null };
+function shopList(){ return MONEY.shop || store.get('shop',[]); }
+function getRate(){ const r = parseFloat(MONEY.rate ?? store.get('rate','3.7')); return r>0 ? r : 3.7; }
+const fmt$ = n => '$'+(Math.round(n*100)/100).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:2});
+const fmtIls = n => '₪'+Math.round(n).toLocaleString('en-US');
+function renderMoney(){
+  $('#v-money').innerHTML = `
+    <div class="card" id="expSum"></div>
+    <div class="sec-h"><h2>מחשבון טיפ</h2></div>
+    <div class="card form">
+      <div class="row" style="align-items:center"><span>החשבון (כולל מס):</span><input class="num" id="tipBill" inputmode="decimal" placeholder="$"></div>
+      <div class="tips" id="tipOut"></div>
+      <p class="muted" style="margin:0;font-size:14px">במסעדה עם מלצר: 18–22%. בבר $1–2 למשקה. במונית 15–20%. בבית קפה עם דלפק הטיפ לא חובה. לבדוק בחשבון שהטיפ לא כבר כלול ("service charge" / "gratuity").</p>
+    </div>
+    <div class="sec-h"><h2>המרת מטבע</h2></div>
+    <div class="card form">
+      <div class="row" style="align-items:center"><span>שער הדולר:</span><input class="num" id="rate" inputmode="decimal" value="${esc(getRate())}"> <a class="act" href="${esc(googleUrl('USD to ILS'))}" target="_blank" rel="noopener">השער של היום</a></div>
+      <div class="row" style="align-items:center"><input class="num" id="convUsd" inputmode="decimal" placeholder="$"><span>=</span><input class="num" id="convIls" inputmode="decimal" placeholder="₪"></div>
+      <p class="muted" style="margin:0;font-size:14px">המחיר על המדף לא כולל מס מכירה (כ־8.9% בניו יורק; על בגדים ונעליים מתחת ל־$110 לפריט אין מס). השער משותף לשתיכן.</p>
+    </div>
+    <div class="sec-h"><h2>רשימת קניות ומתנות</h2></div>
+    <form class="card form" id="shopForm"><div class="row"><input class="grow" id="shopIn" placeholder="מה לקנות ולמי?" maxlength="80" required><button class="btn" type="submit">הוספה</button></div><div class="chk" id="shopList"></div></form>`;
+  const tip=()=>{ const b=parseFloat($('#tipBill').value)||0; $('#tipOut').innerHTML=[18,20,22].map(p=>`<div>${p}%<b>${fmt$(b*p/100)}</b><span class="muted" style="font-size:12px">סה״כ ${fmt$(b*(1+p/100))}<br>לכל אחת ${fmt$(b*(1+p/100)/2)}</span></div>`).join(''); };
+  $('#tipBill').addEventListener('input',tip); tip();
+  $('#convUsd').addEventListener('input',()=>{ const v=parseFloat($('#convUsd').value); $('#convIls').value = v>0 ? Math.round(v*getRate()) : ''; });
+  $('#convIls').addEventListener('input',()=>{ const v=parseFloat($('#convIls').value); $('#convUsd').value = v>0 ? (Math.round(v/getRate()*100)/100) : ''; });
+  let rt; $('#rate').addEventListener('input',()=>{ const v=$('#rate').value; store.set('rate',v); MONEY.rate=v; clearTimeout(rt);
+    if(SYNC.db) rt=setTimeout(()=>SYNC.db.doc('notes/rate').set({usdIls:String(v).slice(0,10), at:new Date().toISOString()}).catch(()=>{}),900); });
+  $('#shopForm').addEventListener('submit', async e=>{ e.preventDefault(); const t=$('#shopIn').value.trim(); if(!t) return; $('#shopIn').value='';
+    const d={text:t.slice(0,80), done:false, at:new Date().toISOString()};
+    if(SYNC.db){ try{ await SYNC.db.collection('shopping').doc().set(d); }catch(err){ moneyErr(); } } else { const l=store.get('shop',[]); l.push({id:'l'+Date.now(),...d}); store.set('shop',l); renderShop(); } });
+  renderExp(); renderShop();
+}
+function moneyErr(){ const s=$('#expSum'); if(s) s.insertAdjacentHTML('afterbegin','<div class="note bad" style="margin-bottom:10px">לא נשמר ברשימה המשותפת. צריך גישת עריכה לדף.</div>'); }
+async function delDoc(col, id){
+  if(SYNC.db){ try{ await SYNC.db.doc(col+'/'+id).delete(); }catch(e){ moneyErr(); } return; }
+  store.set('shop', store.get('shop',[]).filter(x=>x.id!==id)); renderShop();
+}
+/* the summary card: Yaakov reminder + sync status */
+function renderExp(){
+  const sum=$('#expSum'); if(!sum) return;
+  const yk = getAmount(), ok = getDone().yaakov;
+  sum.innerHTML = `<div class="note${ok?' ok':' bad'}">כסף ליעקב על סטינג: ${yk?`<b>${esc(yk)}</b>`:'הסכום עוד לא נרשם (בצ׳קליסט)'} · ${ok?'סומן כמטופל':'עוד לא סומן'}</div><div style="margin-top:10px">${syncHTML()}</div>`;
+}
+function renderShop(){
+  const box=$('#shopList'); if(!box) return;
+  const l=[...shopList()].sort((a,b)=>(a.done-b.done)||String(a.at).localeCompare(String(b.at)));
+  box.innerHTML = l.length ? l.map(x=>`<label class="${x.done?'done':''}"><input type="checkbox" data-shop="${esc(x.id)}" ${x.done?'checked':''}><span style="display:flex;justify-content:space-between;gap:8px"><span class="t">${esc(x.text)}</span><button type="button" class="act" data-sdel="${esc(x.id)}">הסרה</button></span></label>`).join('') : '<p class="muted" style="margin:6px 0 0">הרשימה ריקה.</p>';
+  box.querySelectorAll('[data-shop]').forEach(c=>c.addEventListener('change',async()=>{ const id=c.dataset.shop;
+    if(SYNC.db){ const x=l.find(y=>y.id===id); try{ await SYNC.db.doc('shopping/'+id).set({text:x.text, done:c.checked, at:x.at}); }catch(e){ moneyErr(); } }
+    else { store.set('shop', store.get('shop',[]).map(y=>y.id===id?{...y,done:c.checked}:y)); renderShop(); } }));
+  box.querySelectorAll('[data-sdel]').forEach(b=>b.addEventListener('click',e=>{ e.preventDefault(); delDoc('shopping',b.dataset.sdel); }));
+}
+
+/* ---------------- SHOW-TO-SOMEONE CARDS ---------------- */
+function showCard(html){ const c=$('#showcard'); c.innerHTML=html+'<button type="button" id="cardClose">סגירה</button>'; c.hidden=false; $('#cardClose').addEventListener('click',()=>{ c.hidden=true; }); try{ navigator.wakeLock && navigator.wakeLock.request('screen').catch(()=>{}); }catch(e){} }
+function showAllergy(){ showCard(`<h2>SEVERE EGG ALLERGY</h2>
+  <p>I have a <b>severe, life-threatening allergy to eggs</b>, including traces and cross-contamination (shared fryers, pans, utensils, glazes, mayo, aioli, batter, breading, pasta, baked goods, egg-white cocktails).</p>
+  <p>Could you please check every ingredient with the kitchen?</p>
+  <p>I carry an EpiPen. If I have a reaction, please call <b>911</b>.</p>
+  <p class="he">אלרגיה חמורה לביצים, כולל עקבות וזיהום צולב. יש לי אפיפן. במקרה של תגובה: 911.</p>`); }
+function showAddress(){}
+
+function renderInfo(){
+  $('#v-info').innerHTML = `
+    <div class="sec-h"><h2>להראות למישהו</h2></div>
+    <div class="acts"><button class="act go" type="button" onclick="showAllergy()">כרטיס אלרגיה למלצר (אנגלית)</button></div>
+    <div class="sec-h"><h2>חירום</h2></div>
+    <div class="grid2">
+      <div class="card" style="border-color:var(--bad)"><h3>תגובה אלרגית</h3><ol style="margin:8px 0 0;padding-inline-start:20px">
+        <li>אפיפן מיד, בירך החיצונית (אפשר דרך המכנס).</li><li>להתקשר ל־<b class="mono">911</b> ולהגיד: <span class="mono" style="direction:ltr;display:inline">"anaphylaxis, EpiPen given"</span>.</li>
+        <li>אם אין שיפור תוך 5–15 דק׳: המזרק השני.</li><li>לשכב עם רגליים מורמות (או לשבת אם קשה לנשום).</li><li>לבית חולים גם אם ההרגשה השתפרה.</li></ol></div>
+      <div class="card"><h3>מספרים</h3><p style="margin:6px 0 0">חירום (משטרה, אמבולנס, כיבוי): <b class="mono">911</b></p>
+        <p style="margin:6px 0 0">מוקד הביטוח של הראל (מהפוליסה):</p>
+        <div class="inline-input"><input id="insNum" style="width:200px" inputmode="tel" placeholder="להעתיק מהפוליסה" value="${esc(INFO.ins ?? store.get('ins',''))}" aria-label="מספר מוקד הביטוח"></div>
+        <p class="muted" style="margin:6px 0 0;font-size:14px">המספר נשמר לשתיכן. להתקשר לביטוח לפני הליכה לרופא שאינו חירום: הם מפנים ומשלמים ישירות.</p></div>
+      <div class="card"><h3>לא חירום</h3><p style="margin:6px 0 0">מרפאות Urgent Care בלי תור (למשל CityMD) פזורות במנהטן ובברוקלין, זולות בהרבה ממיון. בתי מרקחת: CVS, Walgreens, Duane Reade, לרוב פתוחים עד מאוחר.</p></div>
+      <div class="card"><h3>אם נפרדות</h3><p style="margin:6px 0 0">נקודת מפגש קבועה: לובי המלון (15–20.11) או הבית ב־Scotch Plains. לשתף מיקום זו עם זו בוואטסאפ לכל הטיול. דרכון שאבד: הקונסוליה הישראלית בניו יורק, 800 Second Ave (לבדוק שעות באתר).</p></div>
+    </div>
+    <div class="sec-h"><h2>טיסות ונחיתות</h2></div>
+    ${flightsHTML()}
+    <div class="sec-h"><h2>סטטוס בזמן אמת</h2></div>
+    <div class="acts">
+      <a class="act go" href="https://new.mta.info/" target="_blank" rel="noopener">סאבוויי: שיבושים היום</a>
+      <a class="act go" href="https://www.njtransit.com/travel-alerts-to" target="_blank" rel="noopener">NJ Transit: התראות</a>
+      <a class="act" href="${esc(googleUrl('IZ991 flight status'))}" target="_blank" rel="noopener">סטטוס IZ991</a>
+      <a class="act" href="${esc(googleUrl('IZ992 flight status'))}" target="_blank" rel="noopener">סטטוס IZ992</a>
+      <a class="act" href="https://www.amtrak.com/track-your-train.html" target="_blank" rel="noopener">Amtrak: מעקב רכבת</a>
+      <a class="act" href="https://www.weather.gov/okx/" target="_blank" rel="noopener">מזג אוויר NY</a>
+    </div>
+    <div class="sec-h"><h2>Uber או מונית?</h2></div>
+    <div class="card ride">
+      <div class="rr">${modeChip('uber')}<span><b>Uber / Lyft</b> כשיש מזוודות, ביציאה מ־JFK, לניו ג׳רזי, לברוקלין בלילה ובכל נסיעה לפני 06:00 (להזמין Uber Reserve בערב הקודם). המחיר ידוע מראש. אחרי הופעות יש surge: ללכת 2 בלוקים או לחכות 15 דק׳.</span></div>
+      <div class="rr">${modeChip('taxi')}<span><b>מונית צהובה</b> לנסיעות קצרות בתוך מנהטן: עוצרים ביד ברחוב (האור על הגג דולק = פנויה), משלמים באשראי במסך. לרוב מהירה וזולה מ־Uber בקיצורים. לא לקחת מונית צהובה לניו ג׳רזי.</span></div>
+      <div class="rr">${modeChip('subway')}<span><b>סאבוויי</b> הכי מהיר במנהטן וברוקלין. $3 לנסיעה. מצמידים את הטלפון (Apple/Google Pay) או אשראי ללא מגע לקורא OMNY. אחרי 12 נסיעות בשבוע, השאר באותו שבוע חינם. כל אחת משלמת בכרטיס/טלפון משלה.</span></div>
+      <div class="rr">${modeChip('njt')}<span><b>NJ Transit</b> בין Scotch Plains/Fanwood ל־NY Penn, דרך Newark. כרטיסים באפליקציה, מפעילים לפני העלייה. לבדוק כל ערב את הרכבת של מחר, ובשבת את לוח סוף השבוע.</span></div>
+      <div class="rr">${modeChip('walk')}<span><b>ברגל</b> במידטאון הכל קרוב: מהמלון לכנס ORCA ב־Lexington כ־15 דק׳.</span></div>
+    </div>
+    <div class="sec-h"><h2>כתובות חשובות</h2></div>
+    <div class="tbl"><table><thead><tr><th>מקום</th><th>כתובת</th><th>מתי</th></tr></thead><tbody>
+      <tr><td>המלון</td><td>Midtown, ליד Herald Square. הכתובת בקישור של Claude</td><td>15–20.11</td></tr>
+      <tr><td>ORCA קוקטייל</td><td class="mono">7 WTC, 10th Fl, 250 Greenwich St</td><td>17.11 16:00</td></tr>
+      <tr><td>ORCA כנס</td><td class="mono">The Shelburne Sonesta, 303 Lexington Ave</td><td>18–19.11 08:30</td></tr>
+      <tr><td>LIVE with Kelly & Mark</td><td class="mono">281 Spring St</td><td>10.11 07:45</td></tr>
+      <tr><td>Brooklyn Paramount (STING)</td><td class="mono">385 Flatbush Ave Ext, Brooklyn</td><td>20.11 19:00</td></tr>
+      <tr><td>משפחה</td><td>Scotch Plains, NJ (כתובת מדויקת: לבקש)</td><td>8–14.11</td></tr>
+    </tbody></table></div>
+    <div class="sec-h"><h2>כרטיסים: מה יש ומה חסר</h2></div>
+    <div class="tbl"><table><thead><tr><th>מה</th><th>מתי</th><th>מצב</th></tr></thead><tbody>
+      ${[['טיסות Arkia (FlyAll)','8.11 / 22.11','have'],['המלון במידטאון','15–20.11','have'],['LIVE with Kelly & Mark','10.11 07:45','have'],['Whitney (2 כרטיסים)','13.11 17:30','have'],['ORCA','17–19.11','have'],['STING (StubHub)','20.11 20:00','have'],
+         ['SUMMIT','9.11 15:15','book'],['פסל החירות + Ellis','11.11 בוקר','book'],['Amtrak + Library of Congress','12.11','book'],['Rockettes','15.11 17:00','book'],['Frick / Met','20–21.11','book'],
+         ['Seth Meyers','16.11 16:30','tbd'],['Drew Barrymore','18.11 11:00','tbd'],['פיילוט שלי','16.11 10:00','tbd'],['Morgan Library','13.11','tbd'],['Knicks','21.11 19:30','opt']]
+        .map(r=>`<tr><td>${esc(r[0])}</td><td class="mono">${esc(r[1])}</td><td>${tagPill(r[2])}</td></tr>`).join('')}
+    </tbody></table></div>
+    <div class="sec-h"><h2>טוב לדעת</h2></div>
+    <div class="grid2">
+      <div class="card"><h3>ג׳ט לג</h3><p style="margin:6px 0 0">ביום הנחיתה לא לישון יותר מ־2–3 שעות בצהריים, לצאת לאור יום ולהשכיב ב־21:00–22:00. ביום 9.11 עוד תתעוררו מוקדם מאוד, וזה בסדר.</p></div>
+      <div class="card"><h3>במסעדה</h3><p style="margin:6px 0 0">להגיד בכל הזמנה: <span class="mono" style="direction:ltr;display:inline">Severe egg allergy, including cross-contamination.</span> לשאול על רטבים, מאפים, קוקטיילים (חלבון ביצה!) ופריטים מטוגנים.</p></div>
+      <div class="card"><h3>כסף</h3><p style="margin:6px 0 0">מס מכירה בניו יורק כ־8.9% מתווסף בקופה. טיפ במסעדה: 18–22%. בבר: $1–2 למשקה. למונית: 15–20%.</p></div>
+      <div class="card"><h3>הפרש שעות</h3><p style="margin:6px 0 0">ישראל מקדימה את ניו יורק ב־7 שעות. 11:15 בניו יורק = 18:15 בישראל.</p></div>
+    </div>`;
+  let it; const ins=$('#insNum');
+  ins.addEventListener('input',()=>{ store.set('ins',ins.value); INFO.ins=ins.value; clearTimeout(it);
+    if(SYNC.db) it=setTimeout(()=>SYNC.db.doc('notes/insurance').set({phone:String(ins.value).slice(0,40), at:new Date().toISOString()}).catch(()=>{}),900); });
+}
+const INFO = { ins:null };
+
+/* ---------------- ROUTER ---------------- */
+const TABS=['today','days','before','pack','dress','money','info'];
+function go(tab){
+  TABS.forEach(t=>{ $('#v-'+t).hidden = t!==tab; });
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.setAttribute('aria-current', b.dataset.tab===tab?'page':'false'));
+  if(tab==='today') renderToday();
+  if(tab==='days') renderDays();
+  if(tab==='before'){ $('#v-before').innerHTML=''; listView($('#v-before'),'לפני הטיסה','',BEFORE,2); }
+  if(tab==='pack'){ $('#v-pack').innerHTML=''; listView($('#v-pack'),'רשימת אריזה','',PACK,6); }
+  if(tab==='dress') renderDress();
+  if(tab==='info') renderInfo();
+  if(tab==='money') renderMoney();
+  store.set('tab',tab);
+  curTab = tab;
+  window.scrollTo({top:0});
+}
+let curTab = 'today';
+
+/* ---------------- SHARED STATE (db) ---------------- */
+const SYNC = { db:null, uid:null, user:null, map:null, by:{}, names:{}, amount:null, state:'local', amtTimer:null };
+function getDone(){ return SYNC.map || store.get('chk',{}); }
+function getAmount(){ return SYNC.amount ?? store.get('amt-yaakov',''); }
+function syncHTML(){
+  if(SYNC.state==='live') return `<div class="sync live"><i></i>רשימה משותפת עם אמא: מה שאחת מסמנת מופיע אצל השנייה.</div>`;
+  if(SYNC.state==='loading') return `<div class="sync"><i></i>מתחברת לרשימה המשותפת…</div>`;
+  if(SYNC.state==='err') return `<div class="sync err"><i></i>${esc(SYNC.err||'אין חיבור לרשימה המשותפת כרגע. הסימונים נשמרים בטלפון הזה.')}</div>`;
+  return `<div class="sync"><i></i>הסימונים נשמרים בטלפון הזה.</div>`;
+}
+function rerenderLists(){
+  if(curTab==='before'||curTab==='pack'){
+    const a=document.activeElement; if(a && a.id && a.id.startsWith('amt-')) return; // don't disturb typing
+    const y=window.scrollY; listView($('#v-'+curTab), curTab==='before'?'לפני הטיסה':'רשימת אריזה','', curTab==='before'?BEFORE:PACK, curTab==='before'?2:6); window.scrollTo({top:y});
+  }
+  if(curTab==='today') renderToday();
+  if(curTab==='days'){ const y=window.scrollY; renderDays(); window.scrollTo({top:y}); }
+  if(curTab==='money') renderExp();
+}
+async function setDone(k, v){
+  if(!SYNC.db){ const d=store.get('chk',{}); d[k]=v; store.set('chk',d); return; }
+  SYNC.map = Object.assign({}, SYNC.map, {[k]:v});
+  try{ await SYNC.db.doc('checks/'+k).set({done:!!v, by:SYNC.uid||'', at:new Date().toISOString()}); }
+  catch(e){ SYNC.state='err'; SYNC.err = e && (e.code==='permission_denied'||e.code==='not_granted') ? 'אין לך הרשאה לסמן ברשימה המשותפת. צריך גישת עריכה לדף.' : 'הסימון לא נשמר ברשימה המשותפת. נסי שוב.'; rerenderLists(); }
+}
+function setAmount(v){
+  store.set('amt-yaakov', v);
+  if(!SYNC.db) return;
+  SYNC.amount = v; clearTimeout(SYNC.amtTimer);
+  SYNC.amtTimer = setTimeout(()=>{ SYNC.db.doc('notes/yaakov').set({amount:String(v).slice(0,40), by:SYNC.uid||'', at:new Date().toISOString()}).catch(()=>{}); }, 900);
+}
+async function startSync(){
+  if(!window.claude || !claude.use) return;
+  const [db, user] = await Promise.all([claude.use('db'), claude.use('user')]);
+  if(!db) return;
+  SYNC.db = db; SYNC.user = user; SYNC.state='loading'; rerenderLists();
+  try{ SYNC.uid = user ? await user.id() : null; }catch(e){}
+  const timer = setTimeout(()=>{ if(SYNC.state==='loading'){ SYNC.state='err'; rerenderLists(); } }, 10000);
+  db.collection('checks').onSnapshot(async snap=>{
+    const m={}, by={};
+    snap.docs.forEach(d=>{ const x=d.data()||{}; m[d.id]=!!x.done; if(x.by) by[d.id]=String(x.by); });
+    if(!SYNC.map && snap.empty){ // first time: carry over anything ticked on this phone before sharing
+      const local=store.get('chk',{}); Object.keys(local).forEach(k=>{ if(local[k]) m[k]=true; });
+      SYNC.map=m; Object.keys(local).filter(k=>local[k]).forEach(k=>setDone(k,true));
+    }
+    SYNC.map=m; SYNC.by=by;
+    if(!snap.metadata.fromCache){ clearTimeout(timer); SYNC.state='live'; }
+    const ids=[...new Set(Object.values(by))].filter(Boolean);
+    if(user && ids.length){ try{ const ps=await user.profiles(ids); ids.forEach(id=>{ const n=ps[id]&&ps[id].name; if(n) SYNC.names[id]= id===SYNC.uid ? 'את' : n.split(' ')[0]; }); }catch(e){} }
+    rerenderLists();
+  }, ()=>{ clearTimeout(timer); SYNC.state='err'; rerenderLists(); });
+  db.doc('notes/yaakov').onSnapshot(s=>{
+    if(s.exists){ SYNC.amount = String((s.data()||{}).amount||''); const inp=document.getElementById('amt-yaakov'); if(inp && document.activeElement!==inp) inp.value=SYNC.amount; if(curTab==='money') renderExp(); }
+  }, ()=>{});
+  db.collection('shopping').onSnapshot(snap=>{
+    MONEY.shop = snap.docs.map(d=>{ const x=d.data()||{}; return {id:d.id, text:String(x.text||''), done:!!x.done, at:String(x.at||'')}; });
+    renderShop();
+  }, ()=>{});
+  db.doc('notes/rate').onSnapshot(s=>{
+    if(s.exists){ MONEY.rate = String((s.data()||{}).usdIls||''); const r=document.getElementById('rate'); if(r && document.activeElement!==r) r.value=MONEY.rate; }
+  }, ()=>{});
+  db.doc('notes/insurance').onSnapshot(s=>{
+    if(s.exists){ INFO.ins = String((s.data()||{}).phone||''); const i=document.getElementById('insNum'); if(i && document.activeElement!==i) i.value=INFO.ins; }
+  }, ()=>{});
+}
+
+/* ---------------- TRIP CHAT (sample) ---------------- */
+const CHAT = { sample:null, turns:store.get('chatTurns',[]), ctl:null, busy:false };
+function tripContext(){
+  const done=getDone();
+  const days = DAYS.map(d=>({date:`${d.d}.11.2026 (יום ${d.dow})`, title:d.title, weather:d.w, sleep:d.sleep, sunset:d.sunset||undefined, alerts:d.alerts,
+    livnat_outfit:d.liv.items.join('; '), or_outfit:d.or.items.join('; '),
+    schedule:d.stops.map(s=>[s.t, s.h, s.p, s.how?`(${(MODES[s.m]||['',''])[1]}) ${s.how}`:'', s.tag?TAG[s.tag][1]:''].filter(Boolean).join(' | '))}));
+  const lists = [...BEFORE,...PACK].map(g=>({group:g.g, items:g.items.map(i=>`${done[i[0]]?'[✓]':'[ ]'} ${i[1]}${i[2]?' — '+i[2]:''}`)}));
+  return JSON.stringify({travelers:'אור (הבת, 30, משתתפת בכנס ORCA) וליבנת (האמא). אלרגיה חמורה לביצים — יש מזרקי אפיפן.',
+    flights:'הלוך Arkia IZ991 נחיתה JFK 8.11 04:55 (המראה מנתב״ג משוערת ~23:30 ב־7.11, לא מאומת). חזור Arkia IZ992 JFK 22.11 18:55, להגיע 15:30; נחיתה משוערת בנתב״ג 23.11 ~12:30.',
+    lodging:'8–14.11 אצל משפחה ב־Scotch Plains NJ (תחנת NJ Transit: Fanwood). 15–20.11 מלון במידטאון ליד Herald Sq. ליל 20–21.11 עוד לא נסגר.',
+    orca_dress_code_by_Orly:'17.11 קוקטייל 16:00–20:00 ב־7 WTC קומה 10, 250 Greenwich St, חובה תעודה מזהה, Business Casual: מכנסיים מחויטים עם חולצה יפה, שמלה, חצאית או בלייזר; לא לבוש ערב רשמי. 18–19.11 כנס ב־Shelburne Sonesta, 303 Lexington Ave, 08:30, Business Casual. 18.11 מסיבת דיסקו 19:30–22:30: ג׳ינס, נעלי ספורט, ז׳קט פאייטים משנות ה־80, אביזרים נוצצים.',
+    sting:'20.11 Brooklyn Paramount, 385 Flatbush Ave Ext, דלתות 19:00 מופע 20:00. StubHub Section 8 Row FF Seats 5–7 (לאמת), מסירה עד 16:00. צריך להביא ליעקב כסף על הכרטיסים' + (getAmount()?` (סכום: ${getAmount()})`:'') + '.',
+    money:'מס מכירה NYC ~8.9%; טיפ במסעדה 18–22%; סאבוויי $3 עם OMNY (טלפון/אשראי ללא מגע).',
+    restaurants_from_plan: FOOD.map(x=>`${x.d}.11 ${x.n} (${x.a}, ${x.p}) — ${x.w}${x.s?'; אלרגיה: '+x.s:''}`),
+    days, checklists:lists});
+}
+function chatRules(){
+  const n=nyNow();
+  return `את עוזרת הטיול של אור ואמא שלה ליבנת לניו יורק (8–22.11.2026). עני תמיד בעברית, קצר ומעשי, בגוף שני נקבה רבים/יחיד לפי השאלה. השתמשי בנתוני הטיול למטה כמקור הראשי. כשמשהו לא מופיע בנתונים או לא סגור, אמרי זאת במפורש ותני המלצה כללית מסומנת כהערכה. על מחירים ושעות פתיחה שאינם בנתונים הדגישי שצריך לבדוק. בכל שאלה על אוכל, הזכירי את האלרגיה החמורה לביצים. אל תשתמשי בטבלאות Markdown או בכותרות; שורות קצרות ותבליטים עם "•" בסדר.
+עכשיו בניו יורק: ${n.d}.${n.m}.${n.y} ${n.h}:${n.mi}.
+נתוני הטיול (JSON):
+${tripContext()}`;
+}
+function chatRender(){
+  const box=$('#chatMsgs');
+  if(!CHAT.turns.length){
+    box.innerHTML = `<div class="msg sys">אפשר לשאול כל דבר על הלו״ז, הלבוש, התחבורה וההזמנות. התשובות מבוססות על התוכנית שלכן.</div>
+      <div class="sugg">${['מה לובשות מחר?','איך מגיעות מהמלון ל־7 WTC ב־17.11?','מה עוד לא הזמנו ומה הכי דחוף?','מה עושים עם המזוודות ב־20.11?','ארוחה בטוחה לאלרגיה לביצים ליד Chelsea Market?'].map(q=>`<button type="button">${esc(q)}</button>`).join('')}</div>`;
+    box.querySelectorAll('.sugg button').forEach(b=>b.addEventListener('click',()=>ask(b.textContent)));
+    return;
+  }
+  box.innerHTML = '';
+  CHAT.turns.forEach((t,i)=>{
+    const el=document.createElement('div'); el.className='msg '+(t.role==='user'?'u':'a'); el.textContent=t.content; box.appendChild(el);
+    const q = t.role==='assistant' && CHAT.turns[i-1] && CHAT.turns[i-1].role==='user' ? CHAT.turns[i-1].content : '';
+    if(q){
+      const acts=document.createElement('div'); acts.className='msg-acts';
+      acts.innerHTML = `<a class="act" target="_blank" rel="noopener" href="${esc(googleUrl(q+' New York'))}">בדיקה בגוגל</a><a class="act" target="_blank" rel="noopener" href="${esc('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q+' New York'))}">פתיחה במפות</a>`;
+      box.appendChild(acts);
+    }
+  });
+}
+function chatScroll(){ const l=$('#chatLog'); l.scrollTop=l.scrollHeight; }
+function errCopy(c){
+  return ({not_granted:'הצ׳אט לא אושר בדף הזה. אפשר לאשר אותו בתפריט ההרשאות של הדף.', sampling_disabled:'הצ׳אט לא זמין בחשבון הזה.', rate_limited:'יותר מדי שאלות ברצף. נסי שוב בעוד כמה דקות.', session_expired:'צריך להתחבר מחדש ל־Claude.', refused:'לא הצלחתי לענות על זה. נסי לנסח אחרת.', prompt_too_large:'השיחה ארוכה מדי. התחילי שיחה חדשה.'})[c] || 'משהו השתבש בחיבור. נסי שוב.';
+}
+async function ask(q){
+  q=String(q||'').trim(); if(!q||CHAT.busy||!CHAT.sample) return;
+  CHAT.turns.push({role:'user',content:q}); CHAT.turns=CHAT.turns.slice(-12);
+  chatRender();
+  const box=$('#chatMsgs'); const out=document.createElement('div'); out.className='msg a'; out.textContent='חושבת…'; box.appendChild(out); chatScroll();
+  CHAT.busy=true; CHAT.ctl=new AbortController(); const btn=$('#chatSend'); btn.textContent='עצירה'; btn.classList.add('stop');
+  try{
+    const turns=CHAT.turns[0].role==='user'?CHAT.turns:CHAT.turns.slice(1);
+    const {text,truncated} = await CHAT.sample([{role:'user',content:chatRules()}, ...turns], {cache:false, signal:CHAT.ctl.signal, onText:({text})=>{ out.textContent=text; chatScroll(); }});
+    CHAT.turns.push({role:'assistant',content:text+(truncated?'\n(התשובה נקטעה)':'')});
+    chatRender();
+  }catch(e){
+    const code=e&&e.code;
+    if(e && e.text) CHAT.turns.push({role:'assistant',content:e.text+'\n(נעצר)'});
+    else CHAT.turns.pop();
+    chatRender();
+    if(code!=='cancelled'){ const s=document.createElement('div'); s.className='msg sys'; s.textContent=errCopy(code); box.appendChild(s); }
+    if(code==='not_granted'||code==='sampling_disabled'){ $('#fab').hidden=true; }
+  }finally{
+    CHAT.busy=false; btn.textContent='שליחה'; btn.classList.remove('stop'); store.set('chatTurns',CHAT.turns); chatScroll();
+  }
+}
+function openChat(){ $('#chat').hidden=false; chatRender(); chatScroll(); setTimeout(()=>$('#chatIn').focus(),50); }
+$('#fab').addEventListener('click',openChat);
+$('#chatClose').addEventListener('click',()=>{ $('#chat').hidden=true; });
+$('#chatClear').addEventListener('click',()=>{ if(CHAT.busy&&CHAT.ctl) CHAT.ctl.abort(); CHAT.turns=[]; store.set('chatTurns',[]); chatRender(); });
+$('#chatForm').addEventListener('submit',e=>{ e.preventDefault(); if(CHAT.busy){ CHAT.ctl&&CHAT.ctl.abort(); return; } const v=$('#chatIn').value; $('#chatIn').value=''; ask(v); });
+$('#chatIn').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); $('#chatForm').requestSubmit(); } });
+async function startChat(){
+  if(!window.claude || !claude.use) return;
+  const s = await claude.use('sample'); if(!s) return;
+  CHAT.sample = s; $('#fab').hidden=false;
+}
+document.querySelectorAll('nav.tabs button').forEach(b=>b.addEventListener('click',()=>{ go(b.dataset.tab); try{history.replaceState(null,'','#'+b.dataset.tab);}catch(e){} }));
+function route(){
+  const h=(location.hash||'').slice(1);
+  const m=h.match(/^day-(\d+)$/);
+  if(m && DAYS.some(x=>x.d===+m[1])){ curDay=+m[1]; go('days'); return; }
+  if(TABS.includes(h)){ go(h); return; }
+  const n=nyNow(); if(n.y===2026&&n.m===11&&n.d>=8&&n.d<=22) curDay=n.d;
+  go('today');
+}
+window.addEventListener('hashchange',route);
+route(); tick(); setInterval(tick,30000);
+/* offline copy: no shared lists or chat */
+
+/* ---------------- PWA: offline + install ---------------- */
+if('serviceWorker' in navigator){ window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{})); }
+(function(){
+  const card=document.getElementById('installCard'), how=document.getElementById('installHow'), btn=document.getElementById('installBtn');
+  const standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+  if(standalone || store.get('installHidden',false)) return;
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  if(ios){ how.textContent='בספארי: כפתור השיתוף (הריבוע עם החץ) ואז "הוספה למסך הבית". האפליקציה תעבוד גם בלי אינטרנט.'; card.hidden=false; }
+  let deferred=null;
+  window.addEventListener('beforeinstallprompt',e=>{ e.preventDefault(); deferred=e; how.textContent='מוסיפים למסך הבית, והיא עובדת גם בלי אינטרנט (במטוס, ברכבת התחתית).'; btn.hidden=false; card.hidden=false; });
+  btn.addEventListener('click',async()=>{ if(!deferred) return; deferred.prompt(); try{ await deferred.userChoice; }catch(e){} deferred=null; card.hidden=true; });
+  document.getElementById('installHide').addEventListener('click',()=>{ card.hidden=true; store.set('installHidden',true); });
+})();
+</script>
+
+</body>
+</html>
