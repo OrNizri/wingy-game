@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://accounts.google.com/gsi/client; style-src 'self' 'unsafe-inline' https://accounts.google.com/gsi/style; frame-src https://accounts.google.com/gsi/; connect-src 'self' https://accounts.google.com/gsi/; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>כנפיים</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -56,7 +58,11 @@
     <header class="topbar">
       <span>שלום, <b id="current-user"></b></span>
       <span>שיא אישי: <b id="best-score">0</b></span>
-      <button id="logout-btn" class="btn small">יציאה</button>
+      <span class="controls">
+        <button id="pause-btn" class="btn small icon" title="הפסקה (P)" aria-label="הפסקה">⏸</button>
+        <button id="mute-btn" class="btn small icon" title="סאונד (M)" aria-label="סאונד">🔊</button>
+        <button id="logout-btn" class="btn small">יציאה</button>
+      </span>
     </header>
     <div class="game-wrap">
       <canvas id="game" width="400" height="600"></canvas>

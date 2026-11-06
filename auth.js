@@ -2,9 +2,11 @@
 const USERS_KEY = "wingy_users";
 const SESSION_KEY = "wingy_session";
 
+// אובייקט בלי prototype, כדי ששמות כמו "__proto__" או "constructor" לא ישברו את הטבלה
 function loadUsers() {
-  try { return JSON.parse(localStorage.getItem(USERS_KEY)) || {}; }
-  catch { return {}; }
+  const users = Object.create(null);
+  try { Object.assign(users, JSON.parse(localStorage.getItem(USERS_KEY))); } catch {}
+  return users;
 }
 function saveUsers(users) {
   localStorage.setItem(USERS_KEY, JSON.stringify(users));
@@ -16,16 +18,30 @@ function randomSalt() {
   return Array.from(bytes, b => b.toString(16).padStart(2, "0")).join("");
 }
 
-async function hashPassword(password, salt) {
-  const data = new TextEncoder().encode(salt + ":" + password);
-  if (crypto.subtle) {
-    const buf = await crypto.subtle.digest("SHA-256", data);
-    return Array.from(new Uint8Array(buf), b => b.toString(16).padStart(2, "0")).join("");
-  }
-  // גיבוי לדפדפנים בלי Web Crypto
-  let h = 5381;
-  for (const b of data) h = ((h << 5) + h + b) | 0;
-  return "f" + (h >>> 0).toString(16);
+const toHex = buf => Array.from(new Uint8Array(buf), b => b.toString(16).padStart(2, "0")).join("");
+const PBKDF2_ITERATIONS = 210000;
+
+// PBKDF2-SHA256 — איטי בכוונה, כדי שיהיה קשה לנחש סיסמאות גם אם מישהו משיג את הנתונים
+async function hashPassword(password, salt, iterations = PBKDF2_ITERATIONS) {
+  if (!crypto.subtle) throw new Error("נדרש חיבור מאובטח (https או localhost)");
+  const enc = new TextEncoder();
+  const key = await crypto.subtle.importKey("raw", enc.encode(password), "PBKDF2", false, ["deriveBits"]);
+  const bits = await crypto.subtle.deriveBits(
+    { name: "PBKDF2", hash: "SHA-256", salt: enc.encode(salt), iterations }, key, 256);
+  return toHex(bits);
+}
+
+// תמיכה בחשבונות ישנים שנשמרו עם SHA-256 בודד — משודרגים אוטומטית בכניסה הבאה
+async function legacyHash(password, salt) {
+  return toHex(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(salt + ":" + password)));
+}
+
+// השוואה בזמן קבוע
+function safeEqual(a, b) {
+  if (typeof a !== "string" || typeof b !== "string" || a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
 }
 
 function normalize(name) { return name.trim().toLowerCase(); }
@@ -34,13 +50,13 @@ async function register(username, password, password2) {
   username = username.trim();
   if (username.length < 3 || username.length > 20) return "שם המשתמש חייב להיות באורך 3–20 תווים";
   if (username.includes(":")) return "שם המשתמש לא יכול להכיל את התו :";
-  if (password.length < 4) return "הסיסמה חייבת להכיל לפחות 4 תווים";
+  if (password.length < 6) return "הסיסמה חייבת להכיל לפחות 6 תווים";
   if (password !== password2) return "הסיסמאות אינן תואמות";
   const users = loadUsers();
   const key = normalize(username);
   if (users[key]) return "שם המשתמש כבר תפוס";
   const salt = randomSalt();
-  users[key] = { name: username, salt, hash: await hashPassword(password, salt), best: 0 };
+  users[key] = { name: username, salt, hash: await hashPassword(password, salt), iter: PBKDF2_ITERATIONS, best: 0 };
   saveUsers(users);
   localStorage.setItem(SESSION_KEY, key);
   return null;
@@ -50,8 +66,20 @@ async function login(username, password) {
   const users = loadUsers();
   const key = normalize(username);
   const user = users[key];
-  if (!user || user.provider || (await hashPassword(password, user.salt)) !== user.hash) {
-    return "שם משתמש או סיסמה שגויים";
+  const fail = "שם משתמש או סיסמה שגויים";
+  if (!user || user.provider || !user.salt) {
+    await hashPassword(password, randomSalt()); // אותו זמן תגובה גם כשהמשתמש לא קיים
+    return fail;
+  }
+  const hash = user.iter
+    ? await hashPassword(password, user.salt, user.iter)
+    : await legacyHash(password, user.salt);
+  if (!safeEqual(hash, user.hash)) return fail;
+  if (!user.iter) { // שדרוג חשבון ישן ל-PBKDF2
+    user.salt = randomSalt();
+    user.hash = await hashPassword(password, user.salt);
+    user.iter = PBKDF2_ITERATIONS;
+    saveUsers(users);
   }
   localStorage.setItem(SESSION_KEY, key);
   return null;
@@ -66,8 +94,13 @@ function decodeJwt(token) {
 
 function loginWithGoogle(credential) {
   if (!GOOGLE_CLIENT_ID) return "כניסה עם Google לא מוגדרת";
-  const info = decodeJwt(credential);
-  if (info.aud !== GOOGLE_CLIENT_ID || info.exp * 1000 < Date.now()) return "הכניסה עם Google נכשלה";
+  // הערה: בלי שרת אי אפשר לאמת את חתימת הטוקן; בודקים את מה שאפשר בצד הדפדפן
+  let info;
+  try { info = decodeJwt(credential); } catch { return "הכניסה עם Google נכשלה"; }
+  const validIssuer = info.iss === "accounts.google.com" || info.iss === "https://accounts.google.com";
+  if (!validIssuer || info.aud !== GOOGLE_CLIENT_ID || !info.sub || !(info.exp * 1000 > Date.now())) {
+    return "הכניסה עם Google נכשלה";
+  }
   const users = loadUsers();
   const key = "google:" + info.sub;
   const name = info.given_name || info.name || info.email;
@@ -112,7 +145,7 @@ function saveBestScore(score) {
   const key = localStorage.getItem(SESSION_KEY);
   const users = loadUsers();
   if (!key || !users[key]) return false;
-  if (score > users[key].best) {
+  if (score > (Number(users[key].best) || 0)) {
     users[key].best = score;
     saveUsers(users);
     return true;
@@ -122,7 +155,7 @@ function saveBestScore(score) {
 
 function getLeaderboard(limit = 5) {
   return Object.entries(loadUsers())
-    .map(([key, u]) => ({ key, name: u.name, best: u.best }))
+    .map(([key, u]) => ({ key, name: String(u.name ?? ""), best: Number(u.best) || 0 }))
     .filter(u => u.best > 0)
     .sort((a, b) => b.best - a.best)
     .slice(0, limit);
@@ -173,14 +206,18 @@ document.querySelectorAll(".tab").forEach(tab => {
 
 $("login-form").addEventListener("submit", async e => {
   e.preventDefault();
-  const err = await login($("login-username").value, $("login-password").value);
+  const btn = e.target.querySelector("button"); btn.disabled = true;
+  const err = await login($("login-username").value, $("login-password").value)
+    .catch(ex => ex.message).finally(() => { btn.disabled = false; });
   $("login-error").textContent = err || "";
   if (!err) { e.target.reset(); showScreen(); }
 });
 
 $("register-form").addEventListener("submit", async e => {
   e.preventDefault();
-  const err = await register($("reg-username").value, $("reg-password").value, $("reg-password2").value);
+  const btn = e.target.querySelector("button"); btn.disabled = true;
+  const err = await register($("reg-username").value, $("reg-password").value, $("reg-password2").value)
+    .catch(ex => ex.message).finally(() => { btn.disabled = false; });
   $("register-error").textContent = err || "";
   if (!err) { e.target.reset(); showScreen(); }
 });
