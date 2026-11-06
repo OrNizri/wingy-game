@@ -5,4 +5,4 @@
 //      https://ornizri.github.io
 //      http://localhost:8765
 // 4. הדביקו כאן את ה-Client ID (נראה כמו 1234-abcd.apps.googleusercontent.com)
-const GOOGLE_CLIENT_ID = "";
+const GOOGLE_CLIENT_ID = "328497423734-s1o3sotl8n6td8pmmoukq57h3a54cmkf.apps.googleusercontent.com";
