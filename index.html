@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>כנפיים</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- מסך כניסה / הרשמה -->
+  <section id="auth-screen" class="screen">
+    <div class="card">
+      <h1 class="logo">🐤 כנפיים</h1>
+      <div class="tabs">
+        <button class="tab active" data-tab="login">כניסה</button>
+        <button class="tab" data-tab="register">הרשמה</button>
+      </div>
+
+      <form id="login-form" class="form">
+        <label>שם משתמש
+          <input type="text" id="login-username" autocomplete="username" required>
+        </label>
+        <label>סיסמה
+          <input type="password" id="login-password" autocomplete="current-password" required>
+        </label>
+        <p class="error" id="login-error"></p>
+        <button type="submit" class="btn">כניסה</button>
+      </form>
+
+      <form id="register-form" class="form hidden">
+        <label>שם משתמש
+          <input type="text" id="reg-username" autocomplete="username" required>
+        </label>
+        <label>סיסמה
+          <input type="password" id="reg-password" autocomplete="new-password" required>
+        </label>
+        <label>אימות סיסמה
+          <input type="password" id="reg-password2" autocomplete="new-password" required>
+        </label>
+        <p class="error" id="register-error"></p>
+        <button type="submit" class="btn">הרשמה</button>
+      </form>
+
+      <div class="divider"><span>או</span></div>
+      <div id="google-btn" class="sso"></div>
+      <p class="sso-note hidden" id="google-note">
+        כניסה עם Google עדיין לא מוגדרת — יש להכניס Client ID בקובץ <code>config.js</code>
+        ולהריץ את המשחק דרך <code>http://localhost:8765</code>.
+      </p>
+      <p class="error" id="google-error"></p>
+    </div>
+  </section>
+
+  <!-- מסך משחק -->
+  <section id="game-screen" class="screen hidden">
+    <header class="topbar">
+      <span>שלום, <b id="current-user"></b></span>
+      <span>שיא אישי: <b id="best-score">0</b></span>
+      <button id="logout-btn" class="btn small">יציאה</button>
+    </header>
+    <div class="game-wrap">
+      <canvas id="game" width="400" height="600"></canvas>
+      <aside class="leaderboard">
+        <h2>🏆 טבלת שיאים</h2>
+        <ol id="leaderboard-list"></ol>
+      </aside>
+    </div>
+    <p class="hint">רווח / קליק / נגיעה במסך כדי לנפנף</p>
+  </section>
+
+  <script src="config.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="auth.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
